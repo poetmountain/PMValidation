@@ -67,37 +67,37 @@ PMValidationUnit *email_unit = [manager registerTextField:self.emailTextField
 <table>
   <tr><th colspan="2" style="text-align:center;">Management</th></tr>
   <tr>
-    <td>PMValidationUnit</td>
+    <td><a href="http://poetmountain.github.com/PMValidation/Classes/PMValidationUnit.html">PMValidationUnit</a></td>
     <td>PMValidationUnit handles the validation of one object at a time, such as a static string or a UIKit text object. It receives updates from one or more <tt>PMValidationType</tt> objects.</td>
   </tr>
   <tr>
-    <td>PMValidationManager</td>
+    <td><a href="http://poetmountain.github.com/PMValidation/Classes/PMValidationManager.html">PMValidationManager</a></td>
     <td>PMValidationManager manages the operation of <tt>PMValidationUnit</tt> instances, and acts as the interface for receiving validation updates.</td>
   </tr>
 	
   <tr><th colspan="2" style="text-align:center;">Validation Types</th></tr>
   <tr>
-    <td>PMValidationType</td>
+    <td><a href="http://poetmountain.github.com/PMValidation/Classes/PMValidationType.html">PMValidationType</a></td>
     <td>PMValidationType is the base validation class. This base class has no inherent validation test, and will always return YES for any string sent to the <tt>isTextValid:</tt> method. All other validation classes inherit from this base class.</td>
   </tr>
   <tr>
-    <td>PMValidationEmailType</td>
+    <td><a href="http://poetmountain.github.com/PMValidation/Classes/PMValidationEmailType.html">PMValidationEmailType</a></td>
     <td>This validation class validates a target string as an e-mail address, determining whether it is well-formed.</td>
   </tr>
   <tr>
-    <td>PMValidationLengthType</td>
+    <td><a href="http://poetmountain.github.com/PMValidation/Classes/PMValidationLengthType.html">PMValidationLengthType</a></td>
     <td>This validation class validates a target string based on minimum or maximum length constraints. Either constraint can be used alone, or can be used together.</td>
   </tr>
   <tr>
-    <td>PMValidationRegexType</td>
+    <td><a href="http://poetmountain.github.com/PMValidation/Classes/PMValidationRegexType.html">PMValidationRegexType</a></td>
     <td>This validation class validates a target string with a regular expression.</td>
   </tr>
   <tr>
-    <td>PMValidationStringCompareType</td>
+    <td><a href="http://poetmountain.github.com/PMValidation/Classes/PMValidationStringCompareType.html">PMValidationStringCompareType</a></td>
     <td>This validation class validates the target string by comparing it to another string.</td>
   </tr>
   <tr>
-    <td>PMValidationUITextCompareType</td>
+    <td><a href="http://poetmountain.github.com/PMValidation/Classes/PMValidationUITextCompareType.html">PMValidationUITextCompareType</a></td>
     <td>This validation class validates the target string by comparing it to a UIKit text object.</td>
   </tr>
 			
