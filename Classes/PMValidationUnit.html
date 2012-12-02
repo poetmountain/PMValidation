@@ -1,0 +1,915 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>PMValidationUnit Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">PMValidation </a></h1>
+				<a id="developerHome" href="../index.html">Poet &amp; Mountain, LLC</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">PMValidationUnit Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/errors">&nbsp;&nbsp;&nbsp;&nbsp;errors</option>
+	
+	<option value="//api/name/identifier">&nbsp;&nbsp;&nbsp;&nbsp;identifier</option>
+	
+	<option value="//api/name/isValid">&nbsp;&nbsp;&nbsp;&nbsp;isValid</option>
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/validationUnit">&nbsp;&nbsp;&nbsp;&nbsp;+ validationUnit</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/clearValidationTypes">&nbsp;&nbsp;&nbsp;&nbsp;- clearValidationTypes</option>
+	
+	<option value="//api/name/initWithValidationTypes:identifier:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithValidationTypes:identifier:</option>
+	
+	<option value="//api/name/registerValidationType:">&nbsp;&nbsp;&nbsp;&nbsp;- registerValidationType:</option>
+	
+	<option value="//api/name/textDidChangeNotification:">&nbsp;&nbsp;&nbsp;&nbsp;- textDidChangeNotification:</option>
+	
+	<option value="//api/name/validateText:">&nbsp;&nbsp;&nbsp;&nbsp;- validateText:</option>
+	
+	<option value="//api/name/validationTypeForIdentifier:">&nbsp;&nbsp;&nbsp;&nbsp;- validationTypeForIdentifier:</option>
+	
+	<option value="//api/name/validationUnitStatusUpdatedNotification:">&nbsp;&nbsp;&nbsp;&nbsp;- validationUnitStatusUpdatedNotification:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating an Instance">Creating an Instance</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing a PMValidationUnit">Initializing a PMValidationUnit</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Identification">Identification</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing Validation Types">Managing Validation Types</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Validating an Object">Validating an Object</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Notification Methods">Notification Methods</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/errors">errors</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/identifier">identifier</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isValid">isValid</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/validationUnit">validationUnit</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/clearValidationTypes">clearValidationTypes</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithValidationTypes:identifier:">initWithValidationTypes:identifier:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/registerValidationType:">registerValidationType:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/textDidChangeNotification:">textDidChangeNotification:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/validateText:">validateText:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/validationTypeForIdentifier:">validationTypeForIdentifier:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/validationUnitStatusUpdatedNotification:">validationUnitStatusUpdatedNotification:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="PMValidationUnit Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">PMValidationUnit Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">PMValidationUnit.h<br />PMValidationUnit.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>PMValidationUnit handles the validation of an individual object, such as a static string or a UIKit text object. One or more <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> subclasses can be registered and used to validate the target object, and PMValidationUnit can provide an overall validation status.</p>
+
+<p>For validating a single static string, interfacing with this class is adequate. If you plan to validate UIKit text objects, or if you have many strings and need an aggregate validation status, it is easier to use <a href="../Classes/PMValidationManager.html"><code>PMValidationManager</code></a>.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="Creating an Instance" name="task_Creating an Instance"></a>
+						<h3 class="subsubtitle task-title">Creating an Instance</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/validationUnit">+&nbsp;validationUnit</a></code>
+		<span class="tooltip"><p>Returns an auto-released instance of this class</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Initializing a PMValidationUnit" name="task_Initializing a PMValidationUnit"></a>
+						<h3 class="subsubtitle task-title">Initializing a PMValidationUnit</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithValidationTypes:identifier:">&ndash;&nbsp;initWithValidationTypes:identifier:</a></code>
+		<span class="tooltip"><p>Initializes a new PMValidationUnit object, registering the provided <a href="../Classes/PMValidationType.html">PMValidationType</a> objects and setting the <a href="#//api/name/identifier">identifier</a>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Identification" name="task_Identification"></a>
+						<h3 class="subsubtitle task-title">Identification</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/identifier">&nbsp;&nbsp;identifier</a></code>
+		<span class="tooltip"><p>Used to identify this instance with <a href="../Classes/PMValidationManager.html"><code>PMValidationManager</code></a></p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Managing Validation Types" name="task_Managing Validation Types"></a>
+						<h3 class="subsubtitle task-title">Managing Validation Types</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/registerValidationType:">&ndash;&nbsp;registerValidationType:</a></code>
+		<span class="tooltip"><p>Registers a <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> subclass with this instance.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/clearValidationTypes">&ndash;&nbsp;clearValidationTypes</a></code>
+		<span class="tooltip"><p>Clears all registered validation types.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/validationTypeForIdentifier:">&ndash;&nbsp;validationTypeForIdentifier:</a></code>
+		<span class="tooltip"><p>Finds a <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> associated with a provided <a href="#//api/name/identifier">identifier</a></p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Validating an Object" name="task_Validating an Object"></a>
+						<h3 class="subsubtitle task-title">Validating an Object</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/validateText:">&ndash;&nbsp;validateText:</a></code>
+		<span class="tooltip"><p>Initiates validation update based on the specified string.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isValid">&nbsp;&nbsp;isValid</a></code>
+		<span class="tooltip"><p>Boolean getter denoting the overall validation status of all <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> instances registered with this instance. A value of <code>YES</code> denotes that every validation type test has passed.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/errors">&nbsp;&nbsp;errors</a></code>
+		<span class="tooltip"><p>A <code>NSMutableDictionary</code> of validation errors for each <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> subclass which currently fails validation.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Notification Methods" name="task_Notification Methods"></a>
+						<h3 class="subsubtitle task-title">Notification Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/textDidChangeNotification:">&ndash;&nbsp;textDidChangeNotification:</a></code>
+		<span class="tooltip"><p>Called when an observed object&rsquo;s text has changed</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/validationUnitStatusUpdatedNotification:">&ndash;&nbsp;validationUnitStatusUpdatedNotification:</a></code>
+		<span class="tooltip"><p>Called when a <a href="../Classes/PMValidationType.html">PMValidationType</a> object has updated its validation</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/errors" title="errors"></a>
+	<h3 class="subsubtitle method-title">errors</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A <code>NSMutableDictionary</code> of validation errors for each <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> subclass which currently fails validation.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) NSMutableDictionary *errors</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/identifier" title="identifier"></a>
+	<h3 class="subsubtitle method-title">identifier</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Used to identify this instance with <a href="../Classes/PMValidationManager.html"><code>PMValidationManager</code></a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *identifier</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isValid" title="isValid"></a>
+	<h3 class="subsubtitle method-title">isValid</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Boolean getter denoting the overall validation status of all <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> instances registered with this instance. A value of <code>YES</code> denotes that every validation type test has passed.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) BOOL isValid</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/validationUnit" title="validationUnit"></a>
+	<h3 class="subsubtitle method-title">validationUnit</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an auto-released instance of this class</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (PMValidationUnit *)validationUnit</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/clearValidationTypes" title="clearValidationTypes"></a>
+	<h3 class="subsubtitle method-title">clearValidationTypes</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Clears all registered validation types.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)clearValidationTypes</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithValidationTypes:identifier:" title="initWithValidationTypes:identifier:"></a>
+	<h3 class="subsubtitle method-title">initWithValidationTypes:identifier:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initializes a new PMValidationUnit object, registering the provided <a href="../Classes/PMValidationType.html">PMValidationType</a> objects and setting the <a href="#//api/name/identifier">identifier</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (id)initWithValidationTypes:(NSSet *)<em>validationTypes</em> identifier:(NSString *)<em>targetIdentifier</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>validationTypes</em></dt>
+			<dd><p>The <a href="../Classes/PMValidationType.html">PMValidationType</a> subclasses that should be used to validate</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>targetIdentifier</em></dt>
+			<dd><p>The string by which to identify this instance with a <a href="../Classes/PMValidationManager.html"><code>PMValidationManager</code></a> instance.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new instance of this class</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/registerValidationType:" title="registerValidationType:"></a>
+	<h3 class="subsubtitle method-title">registerValidationType:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Registers a <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> subclass with this instance.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)registerValidationType:(PMValidationType *)<em>validationType</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>validationType</em></dt>
+			<dd><p>A class or subclass instance of <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/textDidChangeNotification:" title="textDidChangeNotification:"></a>
+	<h3 class="subsubtitle method-title">textDidChangeNotification:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Called when an observed object&rsquo;s text has changed</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)textDidChangeNotification:(NSNotification *)<em>notification</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/validateText:" title="validateText:"></a>
+	<h3 class="subsubtitle method-title">validateText:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initiates validation update based on the specified string.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)validateText:(NSString *)<em>text</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>text</em></dt>
+			<dd><p>The text to validate</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Validation updates are provided by listening to <code>PMValidationUnitUpdateNotification</code> notifications.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/validationTypeForIdentifier:" title="validationTypeForIdentifier:"></a>
+	<h3 class="subsubtitle method-title">validationTypeForIdentifier:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Finds a <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> associated with a provided <a href="#//api/name/identifier">identifier</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (PMValidationType *)validationTypeForIdentifier:(NSString *)<em>theIdentifier</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>identifier</em></dt>
+			<dd><p>The string associated with the <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> which was provided during the initWithValidationTypes or registerValidationType methods.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The <a href="../Classes/PMValidationType.html"><code>PMValidationType</code></a> instance, or nil if none was found for the provided <a href="#//api/name/identifier">identifier</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/validationUnitStatusUpdatedNotification:" title="validationUnitStatusUpdatedNotification:"></a>
+	<h3 class="subsubtitle method-title">validationUnitStatusUpdatedNotification:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Called when a <a href="../Classes/PMValidationType.html">PMValidationType</a> object has updated its validation</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)validationUnitStatusUpdatedNotification:(NSNotification *)<em>notification</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationUnit.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Poet &amp; Mountain, LLC. All rights reserved. (Last updated: 2012-11-25)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>
