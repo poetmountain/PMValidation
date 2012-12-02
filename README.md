@@ -1,4 +1,12 @@
-PMValidation is a modular, extendable text validation library for iOS. It comes with several common validation types for often-used tasks like validating registration forms, however it was architected to be easily extended with your own validation types. PMValidation was originally built by Poet & Mountain for use in the iOS app [Imprints](https://itunes.apple.com/app/imprints/id577195548?mt=8), but has now been open-sourced.
+PMValidation is a modular, extendable text validation library for iOS. It comes with several common validation types for often-used tasks like validating registration forms, however it was architected to be easily extended with your own validation types.
+
+## Features
+
+* Validate individual string objects or listen to changes from UIKit objects
+* Modular – validation types can be used together to create complex validation constraints
+* Extensible - Easily create your own validation types by subclassing PMValidationType
+* Comes with several useful validation types to satisfy most validation needs
+* Easily implement form validation by using PMValidationManager to register many UIKit objects
 
 ## Overview
 
@@ -8,7 +16,7 @@ Generally, a PMValidationUnit handles the validation of one text object. When yo
 
 ## Getting Started
 
-The included [validation form example]() project should give you a good overview of how PMValidation works.
+The included [validation form example](https://github.com/poetmountain/PMValidation/tree/master/PMValidationDemo) project should give you a good overview of how PMValidation works.
 
 
 ### The basics
@@ -28,17 +36,17 @@ PMValidationUnit *unit = [PMValidationUnit validationUnit];
 		^(NSNotification *notification) {
         PMValidationUnit *unit = (PMValidationUnit *)notification.object;
         
-				BOOL is_valid = unit.isValid;
-				if (!is_valid) {
+				if (!unit.isValid) {
 					NSDictionary *errors = [notification.userInfo valueForKey:@"errors"];
 				}   
     }
 ];
- 
+
+// validate the string 
 [unit validateText:@"Velvet Underground"];
 ```
 
-That example only uses one validation type class, but you can add as many as you want to create very complex validation tests. Of course, power users may want to take advantage of the PMValidationRegexType class, which allows use of a regular expression as a validation test. For complex use cases this can be preferable -- PMValidationEmailType uses a regular expression internally -- but using more basic type classes together can provide greater readability. YMMV.
+That example only uses one validation type class, but you can add as many as you want to create very complex validation tests. Of course, power users may want to take advantage of the PMValidationRegexType class, which allows use of a regular expression as a validation test. For complex use cases this can be preferable – PMValidationEmailType uses a regular expression internally – but using more basic type classes together can provide greater readability. YMMV.
 
 Validating static strings is cool, but let's hook up a PMValidationUnit to a UITextField so we can dynamically validate it as its text changes. While we could do this with just a PMValidationUnit, it's a bit easier to use PMValidationManager for this.
 
