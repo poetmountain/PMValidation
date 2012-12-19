@@ -43,9 +43,7 @@ NSInteger const kPMValidationIgnoreLengthConstraint = -1;
 
 
 -(BOOL) isTextValid:(NSString *)text {
-    
-    DLog(@"text length, minchars %i %i", text.length, self.minimumCharacters);
-    
+        
     BOOL min_valid = YES;
     BOOL max_valid = YES;
     if (self.minimumCharacters == kPMValidationIgnoreLengthConstraint) {

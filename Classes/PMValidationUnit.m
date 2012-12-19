@@ -230,7 +230,6 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 -(void)validationUnitStatusUpdatedNotification:(NSNotification *)notification {
     
     BOOL is_valid = (BOOL)[(NSNumber *)[notification.userInfo objectForKey:@"status"] boolValue];
-    //DLog(@"is_valid %i", is_valid);
     
     if (is_valid) {
         [self validateText:self.lastTextValue];
