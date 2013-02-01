@@ -31,7 +31,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
 
 @synthesize validationUnits;
-@synthesize isValid=_isValid;
+@synthesize isValid;
 
 #pragma mark - Lifecycle methods
 
@@ -93,9 +93,15 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
 -(PMValidationUnit *)registerObject:(id)object forValidationTypes:(NSSet *)validationTypes objectNotificationType:(NSString *)notificationType identifier:(NSString *)identifier {
     
+    NSString *unit_identifier = identifier;
+    if (unit_identifier == nil) {
+        // if no identifier passed in, create one
+        unit_identifier = [[NSNumber numberWithInteger:[self.validationUnits count]+1] stringValue];
+    }
+    
     // create validation unit with passed-in types and save it
-    PMValidationUnit *unit = [[[PMValidationUnit alloc] initWithValidationTypes:validationTypes identifier:identifier] autorelease];
-    [self.validationUnits setObject:unit forKey:identifier];
+    PMValidationUnit *unit = [[[PMValidationUnit alloc] initWithValidationTypes:validationTypes identifier:unit_identifier] autorelease];
+    [self.validationUnits setObject:unit forKey:unit_identifier];
     
     // add listener for object which will pass on text changes to validation unit
     if (notificationType) {
@@ -107,27 +113,30 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
         
     
     // listen for validation updates from unit
+    __unsafe_unretained PMValidationManager *weak_self = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUnitUpdateNotification object:unit queue:nil usingBlock:
         ^(NSNotification *notification){
             
-            // update overall validation status
-            _isValid = [self areAllValid];
-                        
-            // collect all unit errors
-            NSMutableDictionary *total_errors = [NSMutableDictionary dictionary];
-            [self.validationUnits enumerateKeysAndObjectsUsingBlock:^(NSString *key, PMValidationUnit *unit, BOOL *stop) {
-                NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      [NSNumber numberWithBool:unit.isValid], @"isValid",
-                                      unit.errors, @"errors",
-                                      nil];
-                [total_errors setObject:dict forKey:unit.identifier];
+            if (weak_self) {
+                // update overall validation status
+                weak_self.isValid = [weak_self areAllValid];
+                            
+                // collect all unit errors
+                NSMutableDictionary *total_errors = [NSMutableDictionary dictionary];
+                [weak_self.validationUnits enumerateKeysAndObjectsUsingBlock:^(NSString *key, PMValidationUnit *unit, BOOL *stop) {
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [NSNumber numberWithBool:unit.isValid], @"isValid",
+                                          unit.errors, @"errors",
+                                          nil];
+                    [total_errors setObject:dict forKey:unit.identifier];
+                    
+                }];
                 
-            }];
-            
-            // post status update notification
-            NSNumber *is_valid_number = [NSNumber numberWithBool:_isValid];
-            NSDictionary *status_dict = @{@"status":is_valid_number, @"units":total_errors};
-            [[NSNotificationCenter defaultCenter] postNotificationName:PMValidationStatusNotification object:self userInfo:status_dict];
+                // post status update notification
+                NSNumber *is_valid_number = [NSNumber numberWithBool:weak_self.isValid];
+                NSDictionary *status_dict = @{@"status":is_valid_number, @"units":total_errors};
+                [[NSNotificationCenter defaultCenter] postNotificationName:PMValidationStatusNotification object:weak_self userInfo:status_dict];
+            }
         }
      ];
 

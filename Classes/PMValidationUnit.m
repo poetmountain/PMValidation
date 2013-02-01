@@ -40,7 +40,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 @synthesize registeredValidationTypes;
 @synthesize identifier;
-@synthesize isValid=_isValid;
+@synthesize isValid;
 @synthesize lastTextValue;
 @synthesize validationQueue;
 @synthesize errors;
@@ -142,7 +142,8 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
     // first remove any old errors
     [self.errors removeAllObjects];
     
-    NSDictionary *total_errors;
+    NSDictionary *total_errors = nil;
+    
     if (!self.isValid) {
         for (PMValidationType *validation_type in self.registeredValidationTypes) {
             if (!validation_type.isValid) {
@@ -152,10 +153,9 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
         total_errors = [NSDictionary dictionaryWithObject:errors forKey:@"errors"];
     }
     
-    // send notification (on main queue, because there be UI work)
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:PMValidationUnitUpdateNotification object:self userInfo:total_errors];
-    });
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:PMValidationUnitUpdateNotification object:self userInfo:total_errors];
+   
 }
 
 
@@ -166,22 +166,29 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 - (void)validateText:(NSString *)text {
 
+    __unsafe_unretained PMValidationUnit *weak_self = self;
+    
     dispatch_async(self.validationQueue, ^{
         
-        __block NSInteger num_valid = 0;
-        __block NSInteger type_count = [self.registeredValidationTypes count];
-        [self.registeredValidationTypes enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(PMValidationType *type,NSUInteger idx, BOOL *stop) {
-            
-            BOOL is_valid = [type isTextValid:text];
-            num_valid += [[NSNumber numberWithBool:is_valid] integerValue];
-
-        }];
+        if (weak_self) {
+            __block NSInteger num_valid = 0;
+            [weak_self.registeredValidationTypes enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(PMValidationType *type,NSUInteger idx, BOOL *stop) {
                 
-        (num_valid == type_count) ? (_isValid = YES) : (_isValid = NO);
+                BOOL is_valid = [type isTextValid:text];
+                num_valid += [[NSNumber numberWithBool:is_valid] integerValue];
 
-        self.lastTextValue = text;
-    
-        [self validationComplete];
+            }];
+            
+            NSInteger type_count = [weak_self.registeredValidationTypes count];
+            (num_valid == type_count) ? (weak_self.isValid = YES) : (weak_self.isValid = NO);
+
+            weak_self.lastTextValue = text;
+        
+            // send notification (on main queue, because there be UI work)
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weak_self validationComplete];
+            });
+        }
         
     });
     
@@ -195,7 +202,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 - (PMValidationType *) validationTypeForIdentifier:(NSString *)theIdentifier {
     
-    PMValidationType *validation_type;
+    PMValidationType *validation_type = nil;
     
     for (PMValidationType *this_type in self.registeredValidationTypes) {
         if ([this_type.identifier isEqualToString:theIdentifier]) {
@@ -234,7 +241,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
     if (is_valid) {
         [self validateText:self.lastTextValue];
     } else {
-        _isValid = NO;
+        self.isValid = NO;
         [self validationComplete];
 
     }
