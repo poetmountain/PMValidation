@@ -14,8 +14,6 @@ NSString *const kPMValidationStatusMinimumLengthError = @"PMValidationStatusMini
 NSString *const kPMValidationStatusMaximumLengthError = @"PMValidationStatusMaximumLengthError";
 NSInteger const kPMValidationIgnoreLengthConstraint = -1;
 
-@synthesize minimumCharacters;
-@synthesize maximumCharacters;
 
 -(id)init {
     
@@ -29,10 +27,10 @@ NSInteger const kPMValidationIgnoreLengthConstraint = -1;
 }
 
 
-// returns a new, autoreleased instance of PMValidationLengthType
+// returns a new instance of PMValidationLengthType
 + (id) validator {
     
-    PMValidationLengthType *val = [[[PMValidationLengthType alloc] init] autorelease];
+    PMValidationLengthType *val = [[PMValidationLengthType alloc] init];
     
     val.minimumCharacters = kPMValidationIgnoreLengthConstraint;
     val.maximumCharacters = kPMValidationIgnoreLengthConstraint;

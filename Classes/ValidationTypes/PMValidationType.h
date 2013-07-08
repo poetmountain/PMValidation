@@ -59,7 +59,7 @@
 /*
  A collection containing the current validation states. This can also contain error states, if the validation test did not pass.
  */
-@property (nonatomic, retain) NSMutableSet *validationStates;
+@property (nonatomic, strong) NSMutableSet *validationStates;
 
 
 /**

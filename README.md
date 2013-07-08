@@ -119,7 +119,7 @@ PMValidation was created by [Brett Walker](https://twitter.com/petsound) of [Poe
 ## Compatibility
 
 * Requires iOS 5.0 or later
-* PMValidation does not currently use ARC.
+* PMValidation uses ARC.
 
 ## License
 

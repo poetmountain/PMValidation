@@ -28,9 +28,6 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [lastStringValue release];
-    
-    [super dealloc];
 }
 
 
@@ -98,7 +95,7 @@
 // returns a new, autoreleased instance of PMValidationUITextMatchType
 + (id) validator {
     
-    PMValidationUITextCompareType *val = [[[PMValidationUITextCompareType alloc] init] autorelease];
+    PMValidationUITextCompareType *val = [[PMValidationUITextCompareType alloc] init];
     
     return val;
     

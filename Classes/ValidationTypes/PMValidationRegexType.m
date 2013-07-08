@@ -9,8 +9,6 @@
 
 @implementation PMValidationRegexType
 
-@synthesize regexString;
-
 
 #pragma mark - Lifecycle methods
 
@@ -24,21 +22,15 @@
     return self;
 }
 
--(void)dealloc {
-    
-    [regexString release];
-    
-    [super dealloc];
-}
 
 
 #pragma mark - Validator methods
 
 
-// returns a new, autoreleased instance of PMValidationRegexType
+// returns a new instance of PMValidationRegexType
 + (id) validator {
     
-    PMValidationRegexType *val = [[[PMValidationRegexType alloc] init] autorelease];
+    PMValidationRegexType *val = [[PMValidationRegexType alloc] init];
     
     return val;
     

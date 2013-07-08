@@ -13,8 +13,6 @@
 NSString *const kPMValidationComparisonTypeEquals = @"PMValidationComparisonTypeEquals";
 NSString *const kPMValidationComparisonTypeNotEquals = @"PMValidationComparisonTypeNotEquals";
 
-@synthesize comparisonString;
-@synthesize comparisonType;
 
 #pragma mark - Lifecycle methods
 
@@ -29,13 +27,7 @@ NSString *const kPMValidationComparisonTypeNotEquals = @"PMValidationComparisonT
     return self;
 }
 
--(void)dealloc {
-    
-    [comparisonString release];
-    [comparisonType release];
-    
-    [super dealloc];
-}
+
 
 
 #pragma mark - Validator methods
@@ -57,10 +49,10 @@ NSString *const kPMValidationComparisonTypeNotEquals = @"PMValidationComparisonT
 
 #pragma mark - Class methods
 
-// returns a new, autoreleased instance of PMValidationStringMatchType
+// returns a new instance of PMValidationStringMatchType
 + (id) validator {
     
-    PMValidationStringCompareType *val = [[[PMValidationStringCompareType alloc] init] autorelease];
+    PMValidationStringCompareType *val = [[PMValidationStringCompareType alloc] init];
     
     return val;
     

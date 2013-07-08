@@ -16,12 +16,6 @@ NSString *const kPMValidationStatusInvalid = @"PMValidationStatusInvalid";
 NSString *const PMValidationUpdateNotification = @"PMValidationUpdateNotification";
 
 
-@synthesize isValid;
-@synthesize validationStates;
-@synthesize sendsUpdates;
-@synthesize identifier;
-
-
 #pragma mark - Lifecycle methods
 
 -(id)init {
@@ -37,26 +31,18 @@ NSString *const PMValidationUpdateNotification = @"PMValidationUpdateNotificatio
 }
 
 
-// returns a new, autoreleased instance of PMValidationType
+// returns a new instance of PMValidationType
 + (id)validator {
     
-    PMValidationType *val = [[[PMValidationType alloc] init] autorelease];
+    PMValidationType *val = [[PMValidationType alloc] init];
     
     return val;
     
 }
 
 
--(void)dealloc {
-    
-    [validationStates release];
-    [identifier release];
-    
-    [super dealloc];
-}
 
-
-#pragma mark - methods
+#pragma mark - public methods
 
 
 // base class, no validation occurs so just return yes

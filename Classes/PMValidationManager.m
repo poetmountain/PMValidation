@@ -15,12 +15,14 @@
  This dictionary contains all registered validation units.
  The key is a text object being validated, and the value is a PMValidationUnit instance validating it.
  */
-@property (nonatomic, retain) NSMutableDictionary *validationUnits;
+@property (nonatomic, strong) NSMutableDictionary *validationUnits;
 
 
 // Internal method to determine validation status of all registered PMValidationUnit instances.
 - (BOOL) areAllValid;
 
+// called when a Validation Unit is updated
+- (void)unitUpdateNotificationHandler:(NSNotification *)note;
 
 @end
 
@@ -30,26 +32,23 @@
 NSString *const PMValidationStatusNotification = @"PMValidationStatusNotification";
 
 
-@synthesize validationUnits;
-@synthesize isValid;
-
 #pragma mark - Lifecycle methods
 
 -(id)init {
     
     self = [super init];
     if (self) {
-        self.validationUnits = [[[NSMutableDictionary alloc] init] autorelease];
+        _validationUnits = [[NSMutableDictionary alloc] init];
     }
     
     return self;
 }
 
 
-// returns a new, autoreleased instance of PMValidationManager 
+// returns a new instance of PMValidationManager 
 + (PMValidationManager *) validationManager {
     
-    PMValidationManager *vm = [[[PMValidationManager alloc] init] autorelease];
+    PMValidationManager *vm = [[PMValidationManager alloc] init];
     
     return vm;
     
@@ -60,14 +59,8 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 -(void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [validationUnits release];
-    
-    [super dealloc];
+        
 }
-
-
-
 
 
 
@@ -100,7 +93,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
     }
     
     // create validation unit with passed-in types and save it
-    PMValidationUnit *unit = [[[PMValidationUnit alloc] initWithValidationTypes:validationTypes identifier:unit_identifier] autorelease];
+    PMValidationUnit *unit = [[PMValidationUnit alloc] initWithValidationTypes:validationTypes identifier:unit_identifier];
     [self.validationUnits setObject:unit forKey:unit_identifier];
     
     // add listener for object which will pass on text changes to validation unit
@@ -113,38 +106,39 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
         
     
     // listen for validation updates from unit
-    __unsafe_unretained PMValidationManager *weak_self = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUnitUpdateNotification object:unit queue:nil usingBlock:
-        ^(NSNotification *notification){
-            
-            if (weak_self) {
-                // update overall validation status
-                weak_self.isValid = [weak_self areAllValid];
-                            
-                // collect all unit errors
-                NSMutableDictionary *total_errors = [NSMutableDictionary dictionary];
-                [weak_self.validationUnits enumerateKeysAndObjectsUsingBlock:^(NSString *key, PMValidationUnit *unit, BOOL *stop) {
-                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          [NSNumber numberWithBool:unit.isValid], @"isValid",
-                                          unit.errors, @"errors",
-                                          nil];
-                    [total_errors setObject:dict forKey:unit.identifier];
-                    
-                }];
-                
-                // post status update notification
-                NSNumber *is_valid_number = [NSNumber numberWithBool:weak_self.isValid];
-                NSDictionary *status_dict = @{@"status":is_valid_number, @"units":total_errors};
-                [[NSNotificationCenter defaultCenter] postNotificationName:PMValidationStatusNotification object:weak_self userInfo:status_dict];
-            }
-        }
-     ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unitUpdateNotificationHandler:) name:PMValidationUnitUpdateNotification object:unit];
 
     
     return unit;
 }
 
 
+#pragma mark - Notification methods
+
+- (void)unitUpdateNotificationHandler:(NSNotification *)note {
+    
+
+    // update overall validation status
+    self.isValid = [self areAllValid];
+    
+    // collect all unit errors
+    NSMutableDictionary *total_errors = [NSMutableDictionary dictionary];
+    [self.validationUnits enumerateKeysAndObjectsUsingBlock:^(NSString *key, PMValidationUnit *unit, BOOL *stop) {
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithBool:unit.isValid], @"isValid",
+                              unit.errors, @"errors",
+                              nil];
+        [total_errors setObject:dict forKey:unit.identifier];
+        
+    }];
+    
+    // post status update notification
+    NSNumber *is_valid_number = [NSNumber numberWithBool:self.isValid];
+    NSDictionary *status_dict = @{@"status":is_valid_number, @"units":total_errors};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PMValidationStatusNotification object:self userInfo:status_dict];
+    
+    
+}
 
 
 

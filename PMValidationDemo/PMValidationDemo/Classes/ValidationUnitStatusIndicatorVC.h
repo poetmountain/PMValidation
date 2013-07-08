@@ -12,7 +12,7 @@
 
 @interface ValidationUnitStatusIndicatorVC : UIViewController
 
-@property (nonatomic, retain) UIImageView *indicatorIcon;
+@property (nonatomic, strong) UIImageView *indicatorIcon;
 
 
 - (void) registerWithValidationUnit:(PMValidationUnit *)validationUnit;

@@ -336,6 +336,7 @@
 		8B1E1AE4165C73790023EB75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PMValidationDemo/PMValidationDemo-Prefix.pch";
 				INFOPLIST_FILE = "PMValidationDemo/PMValidationDemo-Info.plist";
@@ -347,6 +348,7 @@
 		8B1E1AE5165C73790023EB75 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PMValidationDemo/PMValidationDemo-Prefix.pch";
 				INFOPLIST_FILE = "PMValidationDemo/PMValidationDemo-Info.plist";

@@ -20,7 +20,7 @@
     [super viewDidLoad];
         
     CGRect icon_frame = CGRectMake(0, 0, 30, 30);
-    self.indicatorIcon = [[[UIImageView alloc] initWithFrame:icon_frame] autorelease];
+    self.indicatorIcon = [[UIImageView alloc] initWithFrame:icon_frame];
     self.indicatorIcon.userInteractionEnabled = NO;
 
     [self.view addSubview:self.indicatorIcon];
@@ -36,8 +36,6 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    [indicatorIcon release];
-    [super dealloc];
 }
 
 

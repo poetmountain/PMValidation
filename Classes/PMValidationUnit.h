@@ -108,7 +108,7 @@
 /**
  A `NSMutableDictionary` of validation errors for each `PMValidationType` subclass which currently fails validation.
  */
-@property (nonatomic, retain) NSMutableDictionary *errors;
+@property (nonatomic, strong) NSMutableDictionary *errors;
 
 
 ///---------------------------

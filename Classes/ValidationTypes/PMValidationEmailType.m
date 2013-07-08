@@ -11,10 +11,10 @@
 @implementation PMValidationEmailType
 
 
-// returns a new, autoreleased instance of PMValidationEmailType
+// returns a new instance of PMValidationEmailType
 + (id) validator {
     
-    PMValidationEmailType *val = [[[PMValidationEmailType alloc] init] autorelease];
+    PMValidationEmailType *val = [[PMValidationEmailType alloc] init];
     
     return val;
     

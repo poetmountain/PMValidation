@@ -38,13 +38,6 @@
 NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNotification";
 
 
-@synthesize registeredValidationTypes;
-@synthesize identifier;
-@synthesize isValid;
-@synthesize lastTextValue;
-@synthesize validationQueue;
-@synthesize errors;
-
 #pragma mark - Lifecycle methods
 
 - (id)init {
@@ -52,13 +45,13 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
     self = [super init];
     
     if (self) {
-        self.registeredValidationTypes = [NSMutableSet set];
-        self.errors = [NSMutableDictionary dictionary];
+        _registeredValidationTypes = [NSMutableSet set];
+        _errors = [NSMutableDictionary dictionary];
         
         // create validation dispatch queue
         dispatch_queue_t q = dispatch_queue_create("com.poetmountain.PMValidationUnitQueue", NULL);
         dispatch_retain(q);
-        self.validationQueue = q;
+        _validationQueue = q;
     }
     
     return self;
@@ -91,10 +84,10 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 }
 
 
-// returns a new, autoreleased instance of PMValidationManager
+// returns a new instance of PMValidationUnit
 + (PMValidationUnit *) validationUnit {
     
-    PMValidationUnit *vu = [[[PMValidationUnit alloc] init] autorelease];
+    PMValidationUnit *vu = [[PMValidationUnit alloc] init];
     
     return vu;
     
@@ -109,12 +102,6 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
     
     dispatch_release(self.validationQueue);
 
-    [registeredValidationTypes release];
-    [identifier release];
-    [lastTextValue release];
-    [errors release];
-    
-    [super dealloc];
 }
 
 
@@ -150,7 +137,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
                 [self.errors setObject:validation_type.validationStates forKey:[[validation_type class] type]];
             }
         }
-        total_errors = [NSDictionary dictionaryWithObject:errors forKey:@"errors"];
+        total_errors = [NSDictionary dictionaryWithObject:self.errors forKey:@"errors"];
     }
     
     
@@ -166,28 +153,37 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 - (void)validateText:(NSString *)text {
 
-    __unsafe_unretained PMValidationUnit *weak_self = self;
+    __weak PMValidationUnit *weak_self = self;
     
     dispatch_async(self.validationQueue, ^{
         
         if (weak_self) {
-            __block NSInteger num_valid = 0;
-            [weak_self.registeredValidationTypes enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(PMValidationType *type,NSUInteger idx, BOOL *stop) {
+            __strong PMValidationUnit *strong_self = weak_self;
+            if (strong_self) {
+                __block NSInteger num_valid = 0;
+                [strong_self.registeredValidationTypes enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(PMValidationType *type,NSUInteger idx, BOOL *stop) {
+                    
+                    BOOL is_valid = [type isTextValid:text];
+                    num_valid += [[NSNumber numberWithBool:is_valid] integerValue];
+
+                }];
                 
-                BOOL is_valid = [type isTextValid:text];
-                num_valid += [[NSNumber numberWithBool:is_valid] integerValue];
+                NSInteger type_count = [strong_self.registeredValidationTypes count];
+                (num_valid == type_count) ? (strong_self.isValid = YES) : (strong_self.isValid = NO);
 
-            }];
+                strong_self.lastTextValue = text;
             
-            NSInteger type_count = [weak_self.registeredValidationTypes count];
-            (num_valid == type_count) ? (weak_self.isValid = YES) : (weak_self.isValid = NO);
-
-            weak_self.lastTextValue = text;
-        
-            // send notification (on main queue, because there be UI work)
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weak_self validationComplete];
-            });
+                // send notification (on main queue, because there be UI work)
+                __weak PMValidationUnit *weak_weak_self = self;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (weak_weak_self) {
+                        __strong PMValidationUnit *strong_strong_self = weak_weak_self;
+                        if (strong_strong_self) {
+                            [strong_strong_self validationComplete];
+                        }
+                    }
+                });
+            }
         }
         
     });
