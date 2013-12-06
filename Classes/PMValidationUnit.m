@@ -14,7 +14,7 @@
 /*
  The PMValidationType subclasses that are registered with this instance
  */
-@property (nonatomic, retain) NSMutableOrderedSet *registeredValidationTypes;
+@property (nonatomic, retain) NSMutableSet *registeredValidationTypes;
 
 /*
  This dispatch queue is used to send events to the `PMValidationType` subclass objects
@@ -161,7 +161,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
             __strong PMValidationUnit *strong_self = weak_self;
             if (strong_self) {
                 __block NSInteger num_valid = 0;
-                [strong_self.registeredValidationTypes enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(PMValidationType *type,NSUInteger idx, BOOL *stop) {
+                [strong_self.registeredValidationTypes enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(PMValidationType *type, BOOL *stop) {
                     
                     BOOL is_valid = [type isTextValid:text];
                     num_valid += [[NSNumber numberWithBool:is_valid] integerValue];
