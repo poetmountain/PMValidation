@@ -246,7 +246,7 @@
     PMValidationRegexType *val_login_regex = [PMValidationRegexType validator];
     val_login_regex.regexString = @"^[A-Z0-9a-z]+$"; // only letters and numbers.
     PMValidationUnit *login_unit = [self.validationManager registerTextField:self.userNameText
-                                                         forValidationTypes:[NSSet setWithObjects:val_login_len, val_login_regex, nil]
+                                                         forValidationTypes:[NSOrderedSet orderedSetWithObjects:val_login_len, val_login_regex, nil]
                                                                  identifier:@"login"];
     [self.userNameStatus registerWithValidationUnit:login_unit];
     
@@ -255,7 +255,7 @@
     PMValidationLengthType *val_pass_len = [PMValidationLengthType validator];
     val_pass_len.minimumCharacters = 4;
     PMValidationUnit *pass_unit = [self.validationManager registerTextField:self.passwordText
-                                                        forValidationTypes:[NSSet setWithObjects:val_pass_len, nil]
+                                                        forValidationTypes:[NSOrderedSet orderedSetWithObjects:val_pass_len, nil]
                                                                 identifier:@"password"];
     [self.passwordStatus registerWithValidationUnit:pass_unit];
     
@@ -264,7 +264,7 @@
     PMValidationUITextCompareType *val_retype_match = [PMValidationUITextCompareType validator];
     [val_retype_match registerTextFieldToMatch:self.passwordText];
     PMValidationUnit *retype_unit = [self.validationManager registerTextField:self.retypeText
-                                                          forValidationTypes:[NSSet setWithObjects:val_retype_match, nil]
+                                                          forValidationTypes:[NSOrderedSet orderedSetWithObjects:val_retype_match, nil]
                                                                   identifier:@"retype"];
     [self.retypeStatus registerWithValidationUnit:retype_unit];
     
@@ -272,7 +272,7 @@
     // email
     PMValidationEmailType *val_email = [PMValidationEmailType validator];
     PMValidationUnit *email_unit = [self.validationManager registerTextField:self.emailText
-                                                         forValidationTypes:[NSSet setWithObjects:val_email, nil]
+                                                         forValidationTypes:[NSOrderedSet orderedSetWithObjects:val_email, nil]
                                                                  identifier:@"email"];
     [self.emailStatus registerWithValidationUnit:email_unit];
     

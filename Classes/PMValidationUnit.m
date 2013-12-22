@@ -14,7 +14,7 @@
 /*
  The PMValidationType subclasses that are registered with this instance
  */
-@property (nonatomic, retain) NSMutableOrderedSet *registeredValidationTypes;
+@property (nonatomic, strong) NSMutableOrderedSet *registeredValidationTypes;
 
 /*
  This dispatch queue is used to send events to the `PMValidationType` subclass objects
@@ -45,7 +45,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
     self = [super init];
     
     if (self) {
-        _registeredValidationTypes = [NSMutableSet set];
+        _registeredValidationTypes = [NSMutableOrderedSet orderedSet];
         _errors = [NSMutableDictionary dictionary];
         
         // create validation dispatch queue
@@ -58,12 +58,12 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 }
 
 
--(id)initWithValidationTypes:(NSSet *)validationTypes identifier:(NSString *)targetIdentifier {
+-(id)initWithValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)targetIdentifier {
     
     
     self = [super init];
     if (self) {
-        self.registeredValidationTypes = [NSMutableSet setWithSet:validationTypes];
+        self.registeredValidationTypes = [NSMutableOrderedSet orderedSetWithOrderedSet:validationTypes];
         self.errors = [NSMutableDictionary dictionary];
         self.identifier = targetIdentifier;
         // register for notifications for validation types that send updates

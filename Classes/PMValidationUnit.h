@@ -43,7 +43,7 @@
  @return A new instance of this class
  
  */
-- (id)initWithValidationTypes:(NSSet *)validationTypes identifier:(NSString *)targetIdentifier;
+- (id)initWithValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)targetIdentifier;
 
 
 ///---------------------

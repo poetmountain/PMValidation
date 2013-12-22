@@ -67,7 +67,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 #pragma mark - Object registration methods
 
 
--(PMValidationUnit *)registerTextField:(UITextField *)textField forValidationTypes:(NSSet *)validationTypes identifier:(id)identifier {
+-(PMValidationUnit *)registerTextField:(UITextField *)textField forValidationTypes:(NSOrderedSet *)validationTypes identifier:(id)identifier {
         
     PMValidationUnit *unit = [self registerObject:textField forValidationTypes:validationTypes objectNotificationType:UITextFieldTextDidChangeNotification identifier:identifier];
     
@@ -75,7 +75,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
 }
 
--(PMValidationUnit *)registerTextView:(UITextView *)textView forValidationTypes:(NSSet *)validationTypes identifier:(id)identifier {
+-(PMValidationUnit *)registerTextView:(UITextView *)textView forValidationTypes:(NSOrderedSet *)validationTypes identifier:(id)identifier {
     
     PMValidationUnit *unit = [self registerObject:textView forValidationTypes:validationTypes objectNotificationType:UITextViewTextDidChangeNotification identifier:identifier];
     
@@ -84,7 +84,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 }
 
 
--(PMValidationUnit *)registerObject:(id)object forValidationTypes:(NSSet *)validationTypes objectNotificationType:(NSString *)notificationType identifier:(NSString *)identifier {
+-(PMValidationUnit *)registerObject:(id)object forValidationTypes:(NSOrderedSet *)validationTypes objectNotificationType:(NSString *)notificationType identifier:(NSString *)identifier {
     
     NSString *unit_identifier = identifier;
     if (unit_identifier == nil) {

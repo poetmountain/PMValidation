@@ -43,7 +43,7 @@
  @return A new `PMValidationUnit` instance which handles validation for this set.
  
 */
-- (PMValidationUnit *)registerTextField:(UITextField *)textField forValidationTypes:(NSSet *)validationTypes identifier:(NSString *)identifier;
+- (PMValidationUnit *)registerTextField:(UITextField *)textField forValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)identifier;
 
 /**
  Convenience method to register a `UITextView` to be validated.
@@ -55,7 +55,7 @@
  @return A new `PMValidationUnit` instance which handles validation for this set.
  
 */
-- (PMValidationUnit *)registerTextView:(UITextView *)textView forValidationTypes:(NSSet *)validationTypes identifier:(NSString *)identifier;
+- (PMValidationUnit *)registerTextView:(UITextView *)textView forValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)identifier;
 
 /**
  Registers an object to be validated. 
@@ -68,7 +68,7 @@
  @return A new `PMValidationUnit` instance which handles validation for this set.
  
  */
--(PMValidationUnit *)registerObject:(id)object forValidationTypes:(NSSet *)validationTypes objectNotificationType:(NSString *)notificationType identifier:(NSString *)identifier;
+-(PMValidationUnit *)registerObject:(id)object forValidationTypes:(NSOrderedSet *)validationTypes objectNotificationType:(NSString *)notificationType identifier:(NSString *)identifier;
 
 /**
  Finds a `PMValidationUnit` associated with a provided identifier
