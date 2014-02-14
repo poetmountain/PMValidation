@@ -70,6 +70,11 @@ PMValidationUnit *email_unit = [manager registerTextField:self.emailTextField
 ];
 ```
 
+### Targeting iOS 6 or greater
+
+If your build target is at iOS 6 or greater, you will get errors when building because the compiler treats dispatch queues as true Objective-C objects and doesn't like the manual retain and release statements. To work around this, you will need to put ```#define OS_OBJECT_USE_OBJC 0``` in your .pch file before any import statements. When PMValidation stops supporting iOS 5, this need will go away.
+
+
 ### Class reference
 
 <table>
@@ -114,7 +119,7 @@ PMValidationUnit *email_unit = [manager registerTextField:self.emailTextField
 		
 ## Credits
 
-PMValidation was created by [Brett Walker](https://twitter.com/petsound) of [Poet & Mountain](http://poetmountain.com) for its iPhone app Imprints.
+PMValidation was created by [Brett Walker](https://twitter.com/petsound) of [Poet & Mountain](http://poetmountain.com).
 
 ## Compatibility
 
