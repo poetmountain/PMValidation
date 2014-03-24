@@ -32,7 +32,7 @@ NSString *const PMValidationUpdateNotification = @"PMValidationUpdateNotificatio
 
 
 // returns a new instance of PMValidationType
-+ (id)validator {
++ (instancetype)validator {
     
     PMValidationType *val = [[PMValidationType alloc] init];
     

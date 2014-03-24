@@ -26,7 +26,7 @@
 /**
  Returns an auto-released instance of this class
 */
-+ (PMValidationUnit *) validationUnit;
++ (instancetype) validationUnit;
 
 
 ///--------------------------------------
@@ -76,7 +76,7 @@
 /**
  Finds a `PMValidationType` associated with a provided identifier
  
- @param identifier The string associated with the `PMValidationType` which was provided during the initWithValidationTypes or registerValidationType methods.
+ @param theIdentifier The string associated with the `PMValidationType` which was provided during the initWithValidationTypes or registerValidationType methods.
  
  @return The `PMValidationType` instance, or nil if none was found for the provided identifier.
  

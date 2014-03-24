@@ -12,7 +12,7 @@
 
 
 // returns a new instance of PMValidationEmailType
-+ (id) validator {
++ (instancetype) validator {
     
     PMValidationEmailType *val = [[PMValidationEmailType alloc] init];
     

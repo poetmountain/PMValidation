@@ -29,7 +29,7 @@
  @discussion All subclasses of PMValidationType should override this method to return an instance of the subclass.
  
  */
-+ (id) validator;
++ (instancetype) validator;
 
 
 ///---------------------------

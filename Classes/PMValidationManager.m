@@ -46,7 +46,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
 
 // returns a new instance of PMValidationManager 
-+ (PMValidationManager *) validationManager {
++ (instancetype) validationManager {
     
     PMValidationManager *vm = [[PMValidationManager alloc] init];
     
@@ -89,7 +89,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
     NSString *unit_identifier = identifier;
     if (unit_identifier == nil) {
         // if no identifier passed in, create one
-        unit_identifier = [[NSNumber numberWithInteger:[self.validationUnits count]+1] stringValue];
+        unit_identifier = [[NSNumber numberWithUnsignedInteger:[self.validationUnits count]+1] stringValue];
     }
     
     // create validation unit with passed-in types and save it

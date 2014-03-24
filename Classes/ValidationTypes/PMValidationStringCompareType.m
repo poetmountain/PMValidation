@@ -50,7 +50,7 @@ NSString *const kPMValidationComparisonTypeNotEquals = @"PMValidationComparisonT
 #pragma mark - Class methods
 
 // returns a new instance of PMValidationStringMatchType
-+ (id) validator {
++ (instancetype) validator {
     
     PMValidationStringCompareType *val = [[PMValidationStringCompareType alloc] init];
     

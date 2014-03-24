@@ -31,16 +31,20 @@ length_type.maximumCharacters = 8;
 PMValidationUnit *unit = [PMValidationUnit validationUnit];
 [unit registerValidationType:length_type];
 
-// listen for validation updates from unit
-[[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUnitUpdateNotification object:unit queue:nil usingBlock:
-		^(NSNotification *notification) {
-        PMValidationUnit *unit = (PMValidationUnit *)notification.object;
-        
-				if (!unit.isValid) {
-					NSDictionary *errors = [notification.userInfo valueForKey:@"errors"];
-				}   
-    }
-];
+// get validation status update
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(validationStatusNotificationHandler:) name:PMValidationUnitUpdateNotification object:unit];
+		
+// listen for validation status updates    
+- (void)validationStatusNotificationHandler:(NSNotification *)notification {
+    
+  PMValidationUnit *unit = (PMValidationUnit *)notification.object;
+
+  if (!unit.isValid) {
+  	NSDictionary *errors = [notification.userInfo valueForKey:@"errors"];
+  }  
+    
+}
+
 
 // validate the string 
 [unit validateText:@"Velvet Underground"];
@@ -56,18 +60,21 @@ PMValidationEmailType *email_type = [PMValidationEmailType validator];
 PMValidationUnit *email_unit = [manager registerTextField:self.emailTextField
                                        forValidationTypes:[NSSet setWithObjects:email_type, nil]
                                                identifier:@"email"];
-																							 
-// listen for validation updates from the manager
-[[NSNotificationCenter defaultCenter] addObserverForName:PMValidationStatusNotification object:manager queue:nil usingBlock:
-	^(NSNotification *notification) {
-    	BOOL is_valid = [(NSNumber *)[notification.userInfo objectForKey:@"status"] boolValue];
-			if (!is_valid) {
-				NSDictionary *units = [notification.userInfo objectForKey:@"units"];
-				NSDictionary *email_dict = [units objectForKey:email_type.identifier];
-				NSDictionary *email_errors = [email_dict objectForKey:@"errors"];
-			} 
-   }
-];
+                                               
+// get validation status update
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(validationStatusNotificationHandler:) name:PMValidationStatusNotification object:self.validationManager];
+		
+    
+- (void)validationStatusNotificationHandler:(NSNotification *)notification {
+    
+  BOOL is_valid = [(NSNumber *)[notification.userInfo objectForKey:@"status"] boolValue];
+  if (!is_valid) {
+  	NSDictionary *units = [notification.userInfo objectForKey:@"units"];
+  	NSDictionary *email_dict = [units objectForKey:email_type.identifier];
+  	NSDictionary *email_errors = [email_dict objectForKey:@"errors"];
+  } 
+    
+}
 ```
 
 ### Targeting iOS 6 or greater

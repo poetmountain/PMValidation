@@ -28,7 +28,7 @@ NSInteger const kPMValidationIgnoreLengthConstraint = -1;
 
 
 // returns a new instance of PMValidationLengthType
-+ (id) validator {
++ (instancetype) validator {
     
     PMValidationLengthType *val = [[PMValidationLengthType alloc] init];
     

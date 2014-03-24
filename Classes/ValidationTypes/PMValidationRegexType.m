@@ -28,7 +28,7 @@
 
 
 // returns a new instance of PMValidationRegexType
-+ (id) validator {
++ (instancetype) validator {
     
     PMValidationRegexType *val = [[PMValidationRegexType alloc] init];
     

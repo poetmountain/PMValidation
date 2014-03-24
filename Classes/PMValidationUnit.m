@@ -85,7 +85,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 
 // returns a new instance of PMValidationUnit
-+ (PMValidationUnit *) validationUnit {
++ (instancetype) validationUnit {
     
     PMValidationUnit *vu = [[PMValidationUnit alloc] init];
     
@@ -160,15 +160,13 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
         if (weak_self) {
             __strong PMValidationUnit *strong_self = weak_self;
             if (strong_self) {
-                __block NSInteger num_valid = 0;
-                [strong_self.registeredValidationTypes enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(PMValidationType *type,NSUInteger idx, BOOL *stop) {
-                    
+                NSUInteger num_valid = 0;
+                for (PMValidationType *type in strong_self.registeredValidationTypes) {
                     BOOL is_valid = [type isTextValid:text];
-                    num_valid += [[NSNumber numberWithBool:is_valid] integerValue];
-
-                }];
+                    num_valid += [[NSNumber numberWithBool:is_valid] unsignedIntegerValue];
+                }
                 
-                NSInteger type_count = [strong_self.registeredValidationTypes count];
+                NSUInteger type_count = [strong_self.registeredValidationTypes count];
                 (num_valid == type_count) ? (strong_self.isValid = YES) : (strong_self.isValid = NO);
 
                 strong_self.lastTextValue = text;

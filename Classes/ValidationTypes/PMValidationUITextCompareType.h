@@ -28,7 +28,7 @@
  @discussion All subclasses should override this method to return an instance of the subclass.
  
  */
-+ (id) validator;
++ (instancetype) validator;
 
 
 ///---------------------
@@ -65,7 +65,7 @@
 /**
  Registers a `UITextView` instance whose text value should be used to compare the target validation string against.
  
- @param textField The `UITextView` instance to listen to `UITextViewTextDidChangeNotification` notifications from.
+ @param textView The `UITextView` instance to listen to `UITextViewTextDidChangeNotification` notifications from.
  
  */
 - (void) registerTextViewToMatch:(UITextView *)textView;

@@ -93,7 +93,7 @@
 #pragma mark - Class methods
 
 // returns a new, autoreleased instance of PMValidationUITextMatchType
-+ (id) validator {
++ (instancetype) validator {
     
     PMValidationUITextCompareType *val = [[PMValidationUITextCompareType alloc] init];
     

@@ -25,7 +25,7 @@
  @discussion All subclasses should override this method to return an instance of the subclass.
  
  */
-+ (id) validator;
++ (instancetype) validator;
 
 
 ///---------------------

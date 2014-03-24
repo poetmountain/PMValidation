@@ -26,7 +26,7 @@
 /**
  Returns an auto-released instance of this class
 */
-+ (PMValidationManager *)validationManager;
++ (instancetype)validationManager;
 
 
 ///----------------------------------
