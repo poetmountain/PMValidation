@@ -44,7 +44,7 @@
 		8B1E1AD5165C73790023EB75 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8B1E1AD7165C73790023EB75 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		8B1E1AD9165C73790023EB75 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		8B1E1AE7165C7CA60023EB75 /* PMValidationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = PMValidationManager.h; path = ../../Classes/PMValidationManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		8B1E1AE7165C7CA60023EB75 /* PMValidationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = PMValidationManager.h; path = ../../Classes/PMValidationManager.h; sourceTree = "<group>"; };
 		8B1E1AE8165C7CA60023EB75 /* PMValidationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMValidationManager.m; path = ../../Classes/PMValidationManager.m; sourceTree = "<group>"; };
 		8B1E1AF5165C7CA60023EB75 /* PMValidationUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMValidationUnit.h; path = ../../Classes/PMValidationUnit.h; sourceTree = "<group>"; };
 		8B1E1AF6165C7CA60023EB75 /* PMValidationUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMValidationUnit.m; path = ../../Classes/PMValidationUnit.m; sourceTree = "<group>"; };

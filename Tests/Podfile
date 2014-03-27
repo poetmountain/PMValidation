@@ -1,0 +1,8 @@
+platform :ios, '5.0'
+
+xcodeproj 'PMValidationTests.xcodeproj'
+
+target :PMValidationTests, :exclusive => true do
+  pod 'Specta', '~> 0.2.1'
+  pod 'Expecta', '~> 0.3.0'
+end

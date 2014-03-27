@@ -71,7 +71,6 @@
 
 - (void) textDidChangeNotification:(NSNotification *)notification {
     
-    
     if (notification.name == UITextFieldTextDidChangeNotification) {
         UITextField *text_field = (UITextField *)notification.object;
         self.comparisonString = text_field.text;

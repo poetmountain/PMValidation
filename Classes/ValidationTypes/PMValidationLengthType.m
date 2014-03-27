@@ -52,7 +52,9 @@ NSInteger const kPMValidationIgnoreLengthConstraint = -1;
     
     if (self.maximumCharacters == kPMValidationIgnoreLengthConstraint) {
         max_valid = YES;
-    } else if (self.maximumCharacters >= 0) {
+        
+    // if max is less than min, the max constraint is ignored
+    } else if (self.maximumCharacters >= 0 && self.maximumCharacters >= self.minimumCharacters) {
         (text.length <= self.maximumCharacters) ? (max_valid = YES) : (max_valid = NO);
     }
     
