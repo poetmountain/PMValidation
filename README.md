@@ -1,4 +1,4 @@
-PMValidation is a modular, extendable text validation library for iOS. It comes with several common validation types for often-used tasks like validating registration forms, however it was architected to be easily extended with your own validation types.
+PMValidation is a modular, extendable text validation library for iOS. It comes with several common validation types for often-used tasks like validating registration forms, however it was architected to be easily extended with your own validation types. For a preliminary (but functional) Swift version of this lib, see [PapersPlease](https://github.com/poetmountain/PapersPlease).
 
 ## Features
 
