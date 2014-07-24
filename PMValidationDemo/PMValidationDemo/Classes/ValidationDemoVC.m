@@ -96,7 +96,7 @@
     CGFloat title_x = currx + (view_width/2) - (200/2);
     CGRect title_frame = CGRectMake(title_x, curry, 200, 40);
     self.titleLabel = [[UILabel alloc] initWithFrame:title_frame];
-    self.titleLabel.textAlignment = UITextAlignmentCenter;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.text = @"Registration";
     [self.view addSubview:self.titleLabel];
@@ -108,7 +108,7 @@
     self.userNameLabel = [[UILabel alloc] initWithFrame:loginlabel_frame];
     self.userNameLabel.text = @"Username";
     self.userNameLabel.backgroundColor = [UIColor clearColor];
-    self.userNameLabel.textAlignment = UITextAlignmentRight;
+    self.userNameLabel.textAlignment = NSTextAlignmentRight;
     self.userNameLabel.contentMode = UIViewContentModeBottomRight;
     [self.view addSubview:self.userNameLabel];
     
@@ -138,7 +138,7 @@
     self.emailLabel = [[UILabel alloc] initWithFrame:emaillabel_frame];
     self.emailLabel.text = @"Email";
     self.emailLabel.backgroundColor = [UIColor clearColor];
-    self.emailLabel.textAlignment = UITextAlignmentRight;
+    self.emailLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.emailLabel];
     
     CGRect emailinput_frame = CGRectMake(input_x, curry, input_width, 30);
@@ -166,7 +166,7 @@
     self.passwordLabel = [[UILabel alloc] initWithFrame:passlabel_frame];
     self.passwordLabel.text = @"Password";
     self.passwordLabel.backgroundColor = [UIColor clearColor];
-    self.passwordLabel.textAlignment = UITextAlignmentRight;
+    self.passwordLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.passwordLabel];
     
     CGRect passinput_frame = CGRectMake(input_x, curry, input_width, 30);
@@ -194,7 +194,7 @@
     self.retypeLabel = [[UILabel alloc] initWithFrame:retypelabel_frame];
     self.retypeLabel.text = @"Retype";
     self.retypeLabel.backgroundColor = [UIColor clearColor];
-    self.retypeLabel.textAlignment = UITextAlignmentRight;
+    self.retypeLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:self.retypeLabel];
     
     CGRect retypeinput_frame = CGRectMake(input_x, curry, input_width, 30);

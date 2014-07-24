@@ -34,53 +34,109 @@ describe(@"PMValidationUITextCompareType", ^{
     describe(@", register a UITextField", ^{
         __block UITextField *text_field;
         
-        beforeAll(^{
-            validator = [PMValidationUITextCompareType validator];
-            text_field = [[UITextField alloc] init];
-            validator.lastStringValue = @"cool";
-            [validator registerTextFieldToMatch:text_field];
-            
-        });
+        describe(@"when comparisonType is kPMValidationComparisonTypeEquals", ^{
         
-        it(@"should return YES when UITextField updates with valid text", ^{
+            beforeAll(^{
+                validator = [PMValidationUITextCompareType validator];
+                text_field = [[UITextField alloc] init];
+                validator.lastStringValue = @"cool";
+                [validator registerTextFieldToMatch:text_field];
+                
+            });
             
-            __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUpdateNotification object:validator queue:nil usingBlock:^(NSNotification *note) {
+            it(@"should return YES when UITextField updates with valid text", ^{
                 
-                expect(note.object).to.beIdenticalTo(validator);
-                expect(note.userInfo[@"status"]).to.beTruthy();
+                __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUpdateNotification object:validator queue:nil usingBlock:^(NSNotification *note) {
+                    
+                    expect(note.object).to.beIdenticalTo(validator);
+                    expect(note.userInfo[@"status"]).to.beTruthy();
+                    
+                    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                    
+                }];
                 
-                [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                NSNotification *note = [[NSNotification alloc] initWithName:UITextFieldTextDidChangeNotification object:text_field userInfo:nil];
+                expect(^{
+                    text_field.text = @"cool";
+                    [validator textDidChangeNotification:note];
+                }).to.notify(PMValidationUpdateNotification);
                 
-            }];
+            });
             
-            NSNotification *note = [[NSNotification alloc] initWithName:UITextFieldTextDidChangeNotification object:text_field userInfo:nil];
-            expect(^{
-                text_field.text = @"cool";
-                [validator textDidChangeNotification:note];
-            }).to.notify(PMValidationUpdateNotification);
             
-        });
-        
-        
-        it(@"should return NO when UITextField updates with invalid text", ^{
-            
-            __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUpdateNotification object:validator queue:nil usingBlock:^(NSNotification *note) {
+            it(@"should return NO when UITextField updates with invalid text", ^{
                 
-                expect(note.object).to.beIdenticalTo(validator);
-                expect(note.userInfo[@"status"]).to.beFalsy();
+                __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUpdateNotification object:validator queue:nil usingBlock:^(NSNotification *note) {
+                    
+                    expect(note.object).to.beIdenticalTo(validator);
+                    expect(note.userInfo[@"status"]).to.beFalsy();
+                    
+                    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                    
+                }];
                 
-                [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                NSNotification *note = [[NSNotification alloc] initWithName:UITextFieldTextDidChangeNotification object:text_field userInfo:nil];
+                expect(^{
+                    text_field.text = @"uncool";
+                    [validator textDidChangeNotification:note];
+                }).to.notify(PMValidationUpdateNotification);
                 
-            }];
-            
-            NSNotification *note = [[NSNotification alloc] initWithName:UITextFieldTextDidChangeNotification object:text_field userInfo:nil];
-            expect(^{
-                text_field.text = @"uncool";
-                [validator textDidChangeNotification:note];
-            }).to.notify(PMValidationUpdateNotification);
+            });
             
         });
  
+        
+        describe(@"when comparisonType is kPMValidationComparisonTypeNotEquals", ^{
+            
+            beforeAll(^{
+                validator = [PMValidationUITextCompareType validator];
+                validator.comparisonType = kPMValidationComparisonTypeNotEquals;
+                text_field = [[UITextField alloc] init];
+                validator.lastStringValue = @"cool";
+                [validator registerTextFieldToMatch:text_field];
+                
+            });
+            
+            it(@"should return YES when UITextField updates with different text", ^{
+                
+                __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUpdateNotification object:validator queue:nil usingBlock:^(NSNotification *note) {
+                    
+                    expect(note.object).to.beIdenticalTo(validator);
+                    expect(note.userInfo[@"status"]).to.beTruthy();
+                    
+                    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                    
+                }];
+                
+                NSNotification *note = [[NSNotification alloc] initWithName:UITextFieldTextDidChangeNotification object:text_field userInfo:nil];
+                expect(^{
+                    text_field.text = @"not cool";
+                    [validator textDidChangeNotification:note];
+                }).to.notify(PMValidationUpdateNotification);
+                
+            });
+            
+            
+            it(@"should return NO when UITextField updates with the same text", ^{
+                
+                __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUpdateNotification object:validator queue:nil usingBlock:^(NSNotification *note) {
+                    
+                    expect(note.object).to.beIdenticalTo(validator);
+                    expect(note.userInfo[@"status"]).to.beFalsy();
+                    
+                    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                    
+                }];
+                
+                NSNotification *note = [[NSNotification alloc] initWithName:UITextFieldTextDidChangeNotification object:text_field userInfo:nil];
+                expect(^{
+                    text_field.text = @"cool";
+                    [validator textDidChangeNotification:note];
+                }).to.notify(PMValidationUpdateNotification);
+                
+            });
+            
+        });
         
     });
     

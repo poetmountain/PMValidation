@@ -19,7 +19,7 @@
 /*
  This dispatch queue is used to send events to the `PMValidationType` subclass objects
  */
-@property (nonatomic, assign) dispatch_queue_t validationQueue;
+@property (nonatomic, strong) dispatch_queue_t validationQueue;
 
 /*
  The previous value to compare against
@@ -50,7 +50,6 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
         
         // create validation dispatch queue
         dispatch_queue_t q = dispatch_queue_create("com.poetmountain.PMValidationUnitQueue", NULL);
-        dispatch_retain(q);
         _validationQueue = q;
     }
     
@@ -75,7 +74,6 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
         
         // create validation dispatch queue
         dispatch_queue_t q = dispatch_queue_create("com.poetmountain.PMValidationUnitQueue", NULL);
-        dispatch_retain(q);
         self.validationQueue = q;
 
     }
@@ -100,8 +98,6 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    dispatch_release(self.validationQueue);
-
 }
 
 

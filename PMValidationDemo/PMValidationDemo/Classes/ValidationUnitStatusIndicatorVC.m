@@ -11,8 +11,6 @@
 
 @implementation ValidationUnitStatusIndicatorVC
 
-@synthesize indicatorIcon;
-
 
 #pragma mark - View lifecycle
 

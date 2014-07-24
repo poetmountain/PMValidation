@@ -10,7 +10,6 @@
 
 @implementation PMValidationUITextCompareType
 
-@synthesize lastStringValue;
 
 #pragma mark - Lifecycle methods
 
@@ -36,7 +35,7 @@
 
 -(BOOL)isTextValid:(NSString *)text {
     
-    self.isValid = [text isEqualToString:self.comparisonString];
+    [super isTextValid:text];
     
     self.lastStringValue = text;
     
