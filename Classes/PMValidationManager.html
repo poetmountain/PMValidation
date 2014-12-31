@@ -4,10 +4,9 @@
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>PMValidationManager Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
-		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.1 (build 840)" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -54,11 +53,17 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/addUnit:">&nbsp;&nbsp;&nbsp;&nbsp;- addUnit:</option>
+	
+	<option value="//api/name/addUnit:identifier:">&nbsp;&nbsp;&nbsp;&nbsp;- addUnit:identifier:</option>
+	
 	<option value="//api/name/registerObject:forValidationTypes:objectNotificationType:identifier:">&nbsp;&nbsp;&nbsp;&nbsp;- registerObject:forValidationTypes:objectNotificationType:identifier:</option>
 	
 	<option value="//api/name/registerTextField:forValidationTypes:identifier:">&nbsp;&nbsp;&nbsp;&nbsp;- registerTextField:forValidationTypes:identifier:</option>
 	
 	<option value="//api/name/registerTextView:forValidationTypes:identifier:">&nbsp;&nbsp;&nbsp;&nbsp;- registerTextView:forValidationTypes:identifier:</option>
+	
+	<option value="//api/name/removeUnitForIdentifier:">&nbsp;&nbsp;&nbsp;&nbsp;- removeUnitForIdentifier:</option>
 	
 	<option value="//api/name/unitForIdentifier:">&nbsp;&nbsp;&nbsp;&nbsp;- unitForIdentifier:</option>
 	
@@ -108,11 +113,17 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addUnit:">addUnit:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addUnit:identifier:">addUnit:identifier:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/registerObject:forValidationTypes:objectNotificationType:identifier:">registerObject:forValidationTypes:objectNotificationType:identifier:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/registerTextField:forValidationTypes:identifier:">registerTextField:forValidationTypes:identifier:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/registerTextView:forValidationTypes:identifier:">registerTextView:forValidationTypes:identifier:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeUnitForIdentifier:">removeUnitForIdentifier:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/unitForIdentifier:">unitForIdentifier:</a></span></li>
 	
@@ -150,8 +161,8 @@
 </tr>
 						</tbody></table></div>
 					
-					
-					
+                    
+                    
 					
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
@@ -175,7 +186,6 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/validationManager">+&nbsp;validationManager</a></code>
-		<span class="tooltip"><p>Returns an auto-released instance of this class</p></span>
 	</span>
 	
 	
@@ -190,28 +200,42 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/registerTextField:forValidationTypes:identifier:">&ndash;&nbsp;registerTextField:forValidationTypes:identifier:</a></code>
-		<span class="tooltip"><p>Convenience method to register a <code>UITextField</code> to be validated.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/registerTextView:forValidationTypes:identifier:">&ndash;&nbsp;registerTextView:forValidationTypes:identifier:</a></code>
-		<span class="tooltip"><p>Convenience method to register a <code>UITextView</code> to be validated.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/registerObject:forValidationTypes:objectNotificationType:identifier:">&ndash;&nbsp;registerObject:forValidationTypes:objectNotificationType:identifier:</a></code>
-		<span class="tooltip"><p>Registers an object to be validated.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addUnit:">&ndash;&nbsp;addUnit:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addUnit:identifier:">&ndash;&nbsp;addUnit:identifier:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeUnitForIdentifier:">&ndash;&nbsp;removeUnitForIdentifier:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/unitForIdentifier:">&ndash;&nbsp;unitForIdentifier:</a></code>
-		<span class="tooltip"><p>Finds a <a href="../Classes/PMValidationUnit.html"><code>PMValidationUnit</code></a> associated with a provided identifier</p></span>
 	</span>
 	
 	
@@ -226,7 +250,6 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isValid">&nbsp;&nbsp;isValid</a></code>
-		<span class="tooltip"><p>Boolean getter representing the validation state of all registered <a href="../Classes/PMValidationUnit.html"><code>PMValidationUnit</code></a> instances. A value of <code>YES</code> denotes that every validation test has passed.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -255,7 +278,7 @@
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) BOOL isValid</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL isValid</code></div>
 
     
 	
@@ -332,6 +355,113 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/addUnit:" title="addUnit:"></a>
+	<h3 class="subsubtitle method-title">addUnit:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Adds a <a href="../Classes/PMValidationUnit.html">PMValidationUnit</a> instance.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)addUnit:(PMValidationUnit *)<em>unit</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>unit</em></dt>
+			<dd><p>The <a href="../Classes/PMValidationUnit.html">PMValidationUnit</a> instance to add.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A unique identifier which can be used to retrieve the unit</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/addUnit:identifier:" title="addUnit:identifier:"></a>
+	<h3 class="subsubtitle method-title">addUnit:identifier:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Adds a <a href="../Classes/PMValidationUnit.html">PMValidationUnit</a> instance, and allows for the provision of a custom identifier. If no identifier is passed in, the identifier property on the <a href="../Classes/PMValidationUnit.html">PMValidationUnit</a> is used. If no identifier is set there, one is generated.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)addUnit:(PMValidationUnit *)<em>unit</em> identifier:(NSString *)<em>identifier</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>unit</em></dt>
+			<dd><p>The <a href="../Classes/PMValidationUnit.html">PMValidationUnit</a> instance to add.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>identifier</em></dt>
+			<dd><p>A string by which to identify this unit.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A unique identifier which can be used to retrieve the unit.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/registerObject:forValidationTypes:objectNotificationType:identifier:" title="registerObject:forValidationTypes:objectNotificationType:identifier:"></a>
 	<h3 class="subsubtitle method-title">registerObject:forValidationTypes:objectNotificationType:identifier:</h3>
 	
@@ -367,7 +497,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>identifier</em></dt>
-			<dd><p>A string to identify this validation set by.</p></dd>
+			<dd><p>A string by which to identify this validation set.</p></dd>
 		</dl>
 		
 	</div>
@@ -520,6 +650,52 @@
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/removeUnitForIdentifier:" title="removeUnitForIdentifier:"></a>
+	<h3 class="subsubtitle method-title">removeUnitForIdentifier:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Removes a <a href="../Classes/PMValidationUnit.html">PMValidationUnit</a> instance from PMValidationManager&rsquo;s tracked units.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removeUnitForIdentifier:(NSString *)<em>identifier</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>identifier</em></dt>
+			<dd><p>The string associated with the <a href="../Classes/PMValidationUnit.html"><code>PMValidationUnit</code></a> which was provided during the registerTextField or registerTextView methods.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PMValidationManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/unitForIdentifier:" title="unitForIdentifier:"></a>
 	<h3 class="subsubtitle method-title">unitForIdentifier:</h3>
 	
@@ -573,6 +749,11 @@
 					</div>
 					
 					
+                    
+                    
+                    
+                    
+
 				</div>
 				<div class="main-navigation navigation-bottom">
 					<ul>
@@ -583,9 +764,9 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2014 Poet &amp; Mountain, LLC. All rights reserved. (Last updated: 2014-03-24)</span><br />
+						<p><span class="copyright">&copy; 2014 Poet &amp; Mountain, LLC. All rights reserved. (Last updated: 2014-12-30)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
 						
 					</div>
 				</div>

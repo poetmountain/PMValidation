@@ -24,8 +24,8 @@
 	<key>--repeat-first-par</key>
 	<false/>
 	<key>--verbose</key>
-	<integer>4</integer>
+	<string>4</string>
 	<key>--logformat</key>
-	<integer>1</integer>
+	<string>1</string>
 </dict>
 </plist>
