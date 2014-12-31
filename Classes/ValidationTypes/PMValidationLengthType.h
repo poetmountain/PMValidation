@@ -52,7 +52,7 @@
  @discussion This constraint is ignored unless assigned a value. Assigning this property to `kPMValidationIgnoreLengthConstraint` will explicitly inform PMValidationLengthType to ignore this constraint.
  
  */
-@property (readwrite, assign) NSInteger minimumCharacters;
+@property (nonatomic, assign) NSInteger minimumCharacters;
 
 /**
  Represents the maximum number of characters allowed in the string to validate.
@@ -60,7 +60,7 @@
  @discussion This constraint is ignored unless assigned a value. Assigning this property to `kPMValidationIgnoreLengthConstraint` will explicitly inform PMValidationLengthType to ignore this constraint.
  
  */
-@property (readwrite, assign) NSInteger maximumCharacters;
+@property (nonatomic, assign) NSInteger maximumCharacters;
 
 
 ///---------------------------
@@ -78,7 +78,7 @@
  @return A boolean representing the validation state.
  
  */
--(BOOL)isTextValid:(NSString *)text;
+- (BOOL)isTextValid:(NSString *)text;
 
 
 ///--------------------

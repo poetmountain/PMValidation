@@ -47,13 +47,13 @@
  @return A boolean representing the validation state.
  
 */
--(BOOL)isTextValid:(NSString *)text;
+- (BOOL)isTextValid:(NSString *)text;
 
 
 /**
  Boolean getter representing the validation state of this instance. A value of `YES` denotes that the validation test has passed.
  */
-@property (readwrite, assign) BOOL isValid;
+@property (nonatomic, assign) BOOL isValid;
 
 
 /*
@@ -65,7 +65,7 @@
 /**
  Boolean getter representing whether the `PMValidationType` class or subclass sends updates.
  */
-@property (readwrite, assign) BOOL sendsUpdates;
+@property (nonatomic, assign) BOOL sendsUpdates;
 
 
 ///---------------------

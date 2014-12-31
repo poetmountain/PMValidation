@@ -43,7 +43,7 @@
  @return A new instance of this class
  
  */
-- (id)initWithValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)targetIdentifier;
+- (instancetype)initWithValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)targetIdentifier;
 
 
 ///---------------------
@@ -103,22 +103,37 @@
 /**
  Boolean getter denoting the overall validation status of all `PMValidationType` instances registered with this instance. A value of `YES` denotes that every validation type test has passed.
  */
-@property (readwrite, assign) BOOL isValid;
+@property (nonatomic, assign) BOOL isValid;
 
 /**
- A `NSMutableDictionary` of validation errors for each `PMValidationType` subclass which currently fails validation.
+ A `NSDictionary` of validation errors for each `PMValidationType` subclass which currently fails validation.
  */
-@property (nonatomic, strong) NSMutableDictionary *errors;
+@property (nonatomic, strong) NSDictionary *errors;
+
+/**
+ Boolean getter/setter which controls whether the instance will perform validation. When enabled is set to `NO`, no validation will occur and update notifications will not be sent.
+ */
+@property (nonatomic, assign) BOOL enabled;
 
 
 ///---------------------------
 /// @name Notification Methods
 ///---------------------------
 
-/// Called when an observed object's text has changed
+/** 
+ Called when the text of an observed UIKit text object has changed.
+ 
+ @param notification The system notification, either `UITextFieldTextDidChangeNotification` or `UITextViewTextDidChangeNotification`.
+ 
+*/
 - (void)textDidChangeNotification:(NSNotification *)notification;
 
-/// Called when a PMValidationType object has updated its validation
+/**
+ Called when a PMValidationType object has updated its validation
+ 
+ @param notification The notification sent by a PMValidationType subclass.
+ 
+*/
 - (void)validationUnitStatusUpdatedNotification:(NSNotification *)notification;
 
 

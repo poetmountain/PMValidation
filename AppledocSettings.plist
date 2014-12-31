@@ -3,9 +3,10 @@
 	"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>--input</key>
+	<key>--ignore</key>
 	<array>
-		<string>Classes/</string>
+		<string>PMValidationDemo</string>
+		<string>Tests</string>
 	</array>
 	<key>--output</key>
 	<array>
@@ -17,15 +18,17 @@
 	<string>Poet &amp; Mountain, LLC</string>
 	<key>--company-id</key>
 	<string>com.poetmountain</string>
+  <key>--create-html</key>
+  <true/>
 	<key>--create-docset</key>
-	<true/>
+	<false/>
 	<key>--install-docset</key>
 	<false/>
 	<key>--repeat-first-par</key>
 	<false/>
 	<key>--verbose</key>
-	<integer>4</integer>
+	<string>4</string>
 	<key>--logformat</key>
-	<integer>1</integer>
+	<string>1</string>
 </dict>
 </plist>

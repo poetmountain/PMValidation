@@ -6,13 +6,11 @@ PMValidation is a modular, extendable text validation library for iOS. It comes 
 * Modular – validation types can be used together to create complex validation constraints
 * Extensible - Easily create your own validation types by subclassing PMValidationType
 * Comes with several useful validation types to satisfy most validation needs
-* Easily implement form validation by using PMValidationManager to register many UIKit objects
+* Easily implement form validation by using PMValidationManager to register UIKit text input objects
 
 ## Overview
 
-At its simplest, PMValidation starts with an instance of PMValidationUnit. Each PMValidationUnit controls one or more PMValidationType objects, and PMValidationUnit provides an overall validation state for the types registered with it. All validation types are subclasses of PMValidationType, and you can do the same to easily create your own validator types. 
-
-Generally, a PMValidationUnit handles the validation of one text object. When you are validating more than one text object, such as with a validation form, the PMValidationManager class is useful. This class controls one or more PMValidationUnit objects, providing an overall validation status and notification routing.
+At its simplest, PMValidation starts with an instance of a PMValidationType subclass. These classes provide the validation logic, and can be used directly if you just need a single validation test on your string. PMValidationType can be subclassed to provide your own custom validation logic. If you have a more complex validation test requiring several PMValidationType subclasses and need to determine an overall validation state for a string, use the PMValidationUnit class. When you need to validate more than one string and determine a global validation state (e.g. a validation form), the PMValidationManager class is useful. This class controls one or more PMValidationUnit objects, providing an overall validation status and notification routing. This class also simplifies the validation of UIKit text input classes.
 
 ## Getting Started
 
@@ -50,7 +48,7 @@ PMValidationUnit *unit = [PMValidationUnit validationUnit];
 [unit validateText:@"Velvet Underground"];
 ```
 
-That example only uses one validation type class, but you can add as many as you want to create very complex validation tests. Of course, power users may want to take advantage of the PMValidationRegexType class, which allows use of a regular expression as a validation test. For complex use cases this can be preferable – PMValidationEmailType uses a regular expression internally – but using more basic type classes together can provide greater readability. YMMV.
+That example only uses one validation type class, but you can add as many as you want to create very complex validation tests. An alternative to chaining types together is to use the PMValidationRegexType class, which allows use of a regular expression as a validation test. For complex use cases this can be preferable – PMValidationEmailType uses a regular expression internally – but using more basic validation type classes together can provide greater readability and external customization. YMMV.
 
 Validating static strings is cool, but let's hook up a PMValidationUnit to a UITextField so we can dynamically validate it as its text changes. While we could do this with just a PMValidationUnit, it's a bit easier to use PMValidationManager for this.
 

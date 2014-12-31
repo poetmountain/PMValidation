@@ -15,7 +15,7 @@ NSString *const kPMValidationStatusMaximumLengthError = @"PMValidationStatusMaxi
 NSInteger const kPMValidationIgnoreLengthConstraint = -1;
 
 
--(id)init {
+- (instancetype)init {
     
     self = [super init];
     if (self) {
@@ -40,7 +40,7 @@ NSInteger const kPMValidationIgnoreLengthConstraint = -1;
 }
 
 
--(BOOL) isTextValid:(NSString *)text {
+- (BOOL)isTextValid:(NSString *)text {
         
     BOOL min_valid = YES;
     BOOL max_valid = YES;
@@ -58,7 +58,7 @@ NSInteger const kPMValidationIgnoreLengthConstraint = -1;
         (text.length <= self.maximumCharacters) ? (max_valid = YES) : (max_valid = NO);
     }
     
-    if (min_valid == YES && max_valid == YES) {
+    if (min_valid && max_valid) {
         self.isValid = YES;
     } else {
         self.isValid = NO;
@@ -69,10 +69,10 @@ NSInteger const kPMValidationIgnoreLengthConstraint = -1;
     if (self.isValid) {
         [self.validationStates addObject:kPMValidationStatusValid];
     } else {
-        if (min_valid == NO) {
+        if (!min_valid) {
             [self.validationStates addObject:kPMValidationStatusMinimumLengthError];
         }
-        if (max_valid == NO) {
+        if (!max_valid) {
             [self.validationStates addObject:kPMValidationStatusMaximumLengthError];
         }
         

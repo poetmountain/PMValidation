@@ -63,12 +63,44 @@
  @param object The object to be validated.
  @param validationTypes A set of `PMValidationType` subclasses that specify how to validate the object.
  @param notificationType The name of the notification which a `PMValidationUnit` should listen to text updates for.
- @param identifier A string to identify this validation set by.
+ @param identifier A string by which to identify this validation set.
  
  @return A new `PMValidationUnit` instance which handles validation for this set.
  
  */
 -(PMValidationUnit *)registerObject:(id)object forValidationTypes:(NSOrderedSet *)validationTypes objectNotificationType:(NSString *)notificationType identifier:(NSString *)identifier;
+
+
+/**
+ Adds a PMValidationUnit instance.
+ 
+ @param unit The PMValidationUnit instance to add.
+
+ @return A unique identifier which can be used to retrieve the unit
+ 
+*/
+- (NSString *)addUnit:(PMValidationUnit *)unit;
+
+
+/**
+ Adds a PMValidationUnit instance, and allows for the provision of a custom identifier. If no identifier is passed in, the identifier property on the PMValidationUnit is used. If no identifier is set there, one is generated.
+ 
+ @param unit The PMValidationUnit instance to add.
+ @param identifier A string by which to identify this unit.
+ 
+ @return A unique identifier which can be used to retrieve the unit.
+ 
+ */
+- (NSString *)addUnit:(PMValidationUnit *)unit identifier:(NSString *)identifier;
+
+
+/**
+ Removes a PMValidationUnit instance from PMValidationManager's tracked units.
+ 
+ @param identifier The string associated with the `PMValidationUnit` which was provided during the registerTextField or registerTextView methods.
+*/
+- (void)removeUnitForIdentifier:(NSString *)identifier;
+
 
 /**
  Finds a `PMValidationUnit` associated with a provided identifier
@@ -88,7 +120,7 @@
 /**
  Boolean getter representing the validation state of all registered `PMValidationUnit` instances. A value of `YES` denotes that every validation test has passed.
  */
-@property (readwrite, assign) BOOL isValid;
+@property (nonatomic, assign) BOOL isValid;
 
 
 ///--------------------

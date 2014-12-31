@@ -18,13 +18,13 @@ NSString *const PMValidationUpdateNotification = @"PMValidationUpdateNotificatio
 
 #pragma mark - Lifecycle methods
 
--(id)init {
+- (instancetype)init {
     
     self = [super init];
     if (self) {
-        self.validationStates = [NSMutableSet setWithObject:kPMValidationStatusInvalid];
-        self.sendsUpdates = NO;
-        self.identifier = @"";
+        _validationStates = [NSMutableSet setWithObject:kPMValidationStatusInvalid];
+        _sendsUpdates = NO;
+        _identifier = @"";
     }
     
     return self;
@@ -46,7 +46,7 @@ NSString *const PMValidationUpdateNotification = @"PMValidationUpdateNotificatio
 
 
 // base class, no validation occurs so just return yes
--(BOOL) isTextValid:(NSString *)text {
+- (BOOL)isTextValid:(NSString *)text {
     
     self.isValid = YES;
     // update states

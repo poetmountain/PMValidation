@@ -28,7 +28,7 @@
 
 
 // called when all PMValidationType objects have updated validation
-- (void) validationComplete;
+- (void)validationComplete;
 
 @end
 
@@ -40,31 +40,20 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 #pragma mark - Lifecycle methods
 
-- (id)init {
+- (instancetype)init {
     
-    self = [super init];
-    
-    if (self) {
-        _registeredValidationTypes = [NSMutableOrderedSet orderedSet];
-        _errors = [NSMutableDictionary dictionary];
-        
-        // create validation dispatch queue
-        dispatch_queue_t q = dispatch_queue_create("com.poetmountain.PMValidationUnitQueue", NULL);
-        _validationQueue = q;
-    }
-    
-    return self;
+    return [self initWithValidationTypes:[NSMutableOrderedSet orderedSet] identifier:@"empty"];
 }
 
 
--(id)initWithValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)targetIdentifier {
-    
+- (instancetype)initWithValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)targetIdentifier {
     
     self = [super init];
     if (self) {
-        self.registeredValidationTypes = [NSMutableOrderedSet orderedSetWithOrderedSet:validationTypes];
-        self.errors = [NSMutableDictionary dictionary];
-        self.identifier = targetIdentifier;
+        _registeredValidationTypes = [NSMutableOrderedSet orderedSetWithOrderedSet:validationTypes];
+        _errors = [NSDictionary dictionary];
+        _identifier = targetIdentifier;
+        
         // register for notifications for validation types that send updates
         for (PMValidationType *type in self.registeredValidationTypes) {
             if (type.sendsUpdates) {
@@ -74,7 +63,9 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
         
         // create validation dispatch queue
         dispatch_queue_t q = dispatch_queue_create("com.poetmountain.PMValidationUnitQueue", NULL);
-        self.validationQueue = q;
+        _validationQueue = q;
+        
+        _enabled = YES;
 
     }
     
@@ -83,7 +74,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 
 // returns a new instance of PMValidationUnit
-+ (instancetype) validationUnit {
++ (instancetype)validationUnit {
     
     PMValidationUnit *vu = [[PMValidationUnit alloc] init];
     
@@ -92,18 +83,23 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 }
 
 
-
-
--(void)dealloc {
+- (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 
 
+#pragma mark - getter/setter methods
+
+- (void)setEnabled:(BOOL)enabled {
+    
+    _enabled = enabled;
+    
+}
+
 
 #pragma mark - Validation methods
-
 
 
 - (void)registerValidationType:(PMValidationType *)validationType {
@@ -121,18 +117,18 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 
 - (void)validationComplete {
-    
-    // first remove any old errors
-    [self.errors removeAllObjects];
+
     
     NSDictionary *total_errors = nil;
+    NSMutableDictionary *validation_errors = [NSMutableDictionary dictionary];
     
     if (!self.isValid) {
         for (PMValidationType *validation_type in self.registeredValidationTypes) {
             if (!validation_type.isValid) {
-                [self.errors setObject:validation_type.validationStates forKey:[[validation_type class] type]];
+                [validation_errors setObject:validation_type.validationStates forKey:[[validation_type class] type]];
             }
         }
+        self.errors = [validation_errors copy];
         total_errors = [NSDictionary dictionaryWithObject:self.errors forKey:@"errors"];
     }
     
@@ -149,40 +145,36 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 - (void)validateText:(NSString *)text {
 
-    __weak PMValidationUnit *weak_self = self;
-    
-    dispatch_async(self.validationQueue, ^{
-        
-        if (weak_self) {
-            __strong PMValidationUnit *strong_self = weak_self;
-            if (strong_self) {
-                NSUInteger num_valid = 0;
-                for (PMValidationType *type in strong_self.registeredValidationTypes) {
-                    BOOL is_valid = [type isTextValid:text];
-                    num_valid += [[NSNumber numberWithBool:is_valid] unsignedIntegerValue];
-                }
-                
-                NSUInteger type_count = [strong_self.registeredValidationTypes count];
-                (num_valid == type_count) ? (strong_self.isValid = YES) : (strong_self.isValid = NO);
-
-                strong_self.lastTextValue = text;
+    if (self.enabled) {
             
-                // send notification (on main queue, because there be UI work)
-                __weak PMValidationUnit *weak_weak_self = self;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (weak_weak_self) {
-                        __strong PMValidationUnit *strong_strong_self = weak_weak_self;
-                        if (strong_strong_self) {
-                            [strong_strong_self validationComplete];
-                        }
-                    }
-                });
-            }
-        }
+        __weak PMValidationUnit *weak_self = self;
         
-    });
-    
+        dispatch_async(self.validationQueue, ^{
+            
+            if (weak_self) {
+                __strong PMValidationUnit *strong_self = weak_self;
+                if (strong_self) {
+                    NSUInteger num_valid = 0;
+                    for (PMValidationType *type in strong_self.registeredValidationTypes) {
+                        BOOL is_valid = [type isTextValid:text];
+                        num_valid += [[NSNumber numberWithBool:is_valid] unsignedIntegerValue];
+                    }
+                    
+                    NSUInteger type_count = [strong_self.registeredValidationTypes count];
+                    (num_valid == type_count) ? (strong_self.isValid = YES) : (strong_self.isValid = NO);
 
+                    strong_self.lastTextValue = text;
+                
+                    // send notification (on main queue, because there be UI work)
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [strong_self validationComplete];
+                    });
+                }
+            }
+            
+        });
+    
+    }
     
 }
 
@@ -190,7 +182,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 #pragma mark - Utility methods
 
 
-- (PMValidationType *) validationTypeForIdentifier:(NSString *)theIdentifier {
+- (PMValidationType *)validationTypeForIdentifier:(NSString *)theIdentifier {
     
     PMValidationType *validation_type = nil;
     
@@ -210,7 +202,7 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 
 #pragma mark - Notifications
 
-- (void) textDidChangeNotification:(NSNotification *)notification {
+- (void)textDidChangeNotification:(NSNotification *)notification {
     
     if (notification.name == UITextFieldTextDidChangeNotification) {
         UITextField *text_field = (UITextField *)notification.object;
@@ -224,18 +216,21 @@ NSString *const PMValidationUnitUpdateNotification = @"PMValidationUnitUpdateNot
 }
 
 
--(void)validationUnitStatusUpdatedNotification:(NSNotification *)notification {
+- (void)validationUnitStatusUpdatedNotification:(NSNotification *)notification {
     
-    BOOL is_valid = (BOOL)[(NSNumber *)[notification.userInfo objectForKey:@"status"] boolValue];
-    
-    if (is_valid) {
-        [self validateText:self.lastTextValue];
-    } else {
-        self.isValid = NO;
-        [self validationComplete];
+    if (self.enabled) {
+        
+        BOOL is_valid = (BOOL)[(NSNumber *)[notification.userInfo objectForKey:@"status"] boolValue];
+        
+        if (is_valid) {
+            [self validateText:self.lastTextValue];
+        } else {
+            self.isValid = NO;
+            [self validationComplete];
 
-    }
+        }
     
+    }
     
 }
 

@@ -28,7 +28,7 @@
  @discussion All subclasses should override this method to return an instance of the subclass.
  
  */
-+ (instancetype) validator;
++ (instancetype)validator;
 
 
 ///---------------------
@@ -60,7 +60,7 @@
  @param textField The `UITextField` instance to listen to `UITextFieldTextDidChangeNotification` notifications from.
  
  */
-- (void) registerTextFieldToMatch:(UITextField *)textField;
+- (void)registerTextFieldToMatch:(UITextField *)textField;
 
 /**
  Registers a `UITextView` instance whose text value should be used to compare the target validation string against.
@@ -68,7 +68,7 @@
  @param textView The `UITextView` instance to listen to `UITextViewTextDidChangeNotification` notifications from.
  
  */
-- (void) registerTextViewToMatch:(UITextView *)textView;
+- (void)registerTextViewToMatch:(UITextView *)textView;
 
 
 
@@ -87,7 +87,7 @@
  @return A boolean representing the validation state.
  
  */
--(BOOL)isTextValid:(NSString *)text;
+- (BOOL)isTextValid:(NSString *)text;
 
 
 
@@ -96,8 +96,11 @@
 ///---------------------------
 
 /**
- This notification is fired when a text change update is received from a registered UI object.
+ This notification is fired when a text change update is received from a registered UIKit text object.
+ 
+ @param notification The system notification, either `UITextFieldTextDidChangeNotification` or `UITextViewTextDidChangeNotification`.
+
 */
-- (void) textDidChangeNotification:(NSNotification *)notification;
+- (void)textDidChangeNotification:(NSNotification *)notification;
 
 @end

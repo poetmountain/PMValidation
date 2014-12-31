@@ -17,12 +17,17 @@
  */
 @property (nonatomic, strong) NSMutableDictionary *validationUnits;
 
+// incremental counter, used to assure unique identifier generation
+@property (nonatomic, assign) NSUInteger identifierCounter;
 
 // Internal method to determine validation status of all registered PMValidationUnit instances.
-- (BOOL) areAllValid;
+- (BOOL)areAllValid;
 
-// called when a Validation Unit is updated
+// called when a PMValidationUnit instance is updated
 - (void)unitUpdateNotificationHandler:(NSNotification *)note;
+
+// generates a unique identifier, used when no identifier is passed in
+- (NSString *)generateIdentifier;
 
 @end
 
@@ -34,7 +39,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
 #pragma mark - Lifecycle methods
 
--(id)init {
+- (instancetype)init {
     
     self = [super init];
     if (self) {
@@ -56,7 +61,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
 
 
--(void)dealloc {
+- (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
         
@@ -67,7 +72,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 #pragma mark - Object registration methods
 
 
--(PMValidationUnit *)registerTextField:(UITextField *)textField forValidationTypes:(NSOrderedSet *)validationTypes identifier:(id)identifier {
+- (PMValidationUnit *)registerTextField:(UITextField *)textField forValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)identifier {
         
     PMValidationUnit *unit = [self registerObject:textField forValidationTypes:validationTypes objectNotificationType:UITextFieldTextDidChangeNotification identifier:identifier];
     
@@ -75,7 +80,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
 }
 
--(PMValidationUnit *)registerTextView:(UITextView *)textView forValidationTypes:(NSOrderedSet *)validationTypes identifier:(id)identifier {
+- (PMValidationUnit *)registerTextView:(UITextView *)textView forValidationTypes:(NSOrderedSet *)validationTypes identifier:(NSString *)identifier {
     
     PMValidationUnit *unit = [self registerObject:textView forValidationTypes:validationTypes objectNotificationType:UITextViewTextDidChangeNotification identifier:identifier];
     
@@ -84,12 +89,12 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 }
 
 
--(PMValidationUnit *)registerObject:(id)object forValidationTypes:(NSOrderedSet *)validationTypes objectNotificationType:(NSString *)notificationType identifier:(NSString *)identifier {
+- (PMValidationUnit *)registerObject:(id)object forValidationTypes:(NSOrderedSet *)validationTypes objectNotificationType:(NSString *)notificationType identifier:(NSString *)identifier {
     
     NSString *unit_identifier = identifier;
-    if (unit_identifier == nil) {
-        // if no identifier passed in, create one
-        unit_identifier = [[NSNumber numberWithUnsignedInteger:[self.validationUnits count]+1] stringValue];
+    if (!unit_identifier) {
+        // if no identifier passed in and no identifier found on the unit, create one
+        unit_identifier = [self generateIdentifier];
     }
     
     // create validation unit with passed-in types and save it
@@ -110,6 +115,50 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
     
     return unit;
+}
+
+
+- (NSString *)addUnit:(PMValidationUnit *)unit {
+    
+    NSString *identifier = [self addUnit:unit identifier:nil];
+    
+    return identifier;
+}
+
+
+- (NSString *)addUnit:(PMValidationUnit *)unit identifier:(NSString *)identifier {
+    
+    if (!unit) {
+        return nil;
+    }
+    
+    // if an identifier is passed in, that is used instead of the unit's identifier property
+    NSString *unit_identifier = (identifier) ? identifier : unit.identifier;
+    
+    if (!unit_identifier) {
+        // if no identifier passed in and no identifier found on the unit, create one
+        unit_identifier = [self generateIdentifier];
+    }
+    
+    [self.validationUnits setObject:unit forKey:unit_identifier];
+    
+    return unit_identifier;
+
+}
+
+
+- (void)removeUnitForIdentifier:(NSString *)identifier {
+    
+    [self.validationUnits removeObjectForKey:identifier];
+    
+}
+
+
+- (NSString *)generateIdentifier {
+    
+    NSString *identifier = [[NSNumber numberWithUnsignedInteger:self.identifierCounter++] stringValue];
+    
+    return identifier;
 }
 
 
@@ -134,7 +183,7 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
     
     // post status update notification
     NSNumber *is_valid_number = [NSNumber numberWithBool:self.isValid];
-    NSDictionary *status_dict = @{@"status":is_valid_number, @"units":total_errors};
+    NSDictionary *status_dict = @{@"status":is_valid_number, @"units":[total_errors copy]};
     [[NSNotificationCenter defaultCenter] postNotificationName:PMValidationStatusNotification object:self userInfo:status_dict];
     
     
@@ -154,12 +203,12 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
 
 
 
--(BOOL) areAllValid {
+- (BOOL)areAllValid {
     
     __block BOOL are_valid = YES;
     
     [self.validationUnits enumerateKeysAndObjectsUsingBlock:^(NSString *key, PMValidationUnit *unit, BOOL *stop) {
-        if (!unit.isValid) {
+        if (unit.enabled && !unit.isValid) {
             are_valid = NO;
             *stop = YES;
         }

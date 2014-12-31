@@ -12,7 +12,7 @@
 
 #pragma mark - Lifecycle methods
 
--(id)init {
+- (instancetype)init {
     
     self = [super init];
     if (self) {
@@ -28,7 +28,7 @@
 
 
 // returns a new instance of PMValidationRegexType
-+ (instancetype) validator {
++ (instancetype)validator {
     
     PMValidationRegexType *val = [[PMValidationRegexType alloc] init];
     
@@ -37,7 +37,7 @@
 }
 
 
--(BOOL) isTextValid:(NSString *)text {
+- (BOOL)isTextValid:(NSString *)text {
     
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:self.regexString options:NSRegularExpressionCaseInsensitive error:&error];

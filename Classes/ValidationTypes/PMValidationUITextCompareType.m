@@ -13,7 +13,7 @@
 
 #pragma mark - Lifecycle methods
 
--(id)init {
+- (instancetype)init {
     
     self = [super init];
     if (self) {
@@ -23,7 +23,7 @@
     return self;
 }
 
--(void)dealloc {
+- (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -33,7 +33,7 @@
 #pragma mark - Notification methods
 
 
--(BOOL)isTextValid:(NSString *)text {
+- (BOOL)isTextValid:(NSString *)text {
     
     [super isTextValid:text];
     
@@ -43,7 +43,7 @@
 }
 
 
-- (void) registerTextFieldToMatch:(UITextField *)textField {
+- (void)registerTextFieldToMatch:(UITextField *)textField {
     
     // add listener for object which will pass on text changes to validator unit
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -68,7 +68,7 @@
 
 #pragma mark - Notification methods
 
-- (void) textDidChangeNotification:(NSNotification *)notification {
+- (void)textDidChangeNotification:(NSNotification *)notification {
     
     if (notification.name == UITextFieldTextDidChangeNotification) {
         UITextField *text_field = (UITextField *)notification.object;
@@ -91,7 +91,7 @@
 #pragma mark - Class methods
 
 // returns a new, autoreleased instance of PMValidationUITextMatchType
-+ (instancetype) validator {
++ (instancetype)validator {
     
     PMValidationUITextCompareType *val = [[PMValidationUITextCompareType alloc] init];
     

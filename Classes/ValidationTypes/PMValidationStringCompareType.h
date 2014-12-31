@@ -25,7 +25,7 @@
  @discussion All subclasses should override this method to return an instance of the subclass.
  
  */
-+ (instancetype) validator;
++ (instancetype)validator;
 
 
 ///---------------------
@@ -74,7 +74,7 @@
  @return A boolean representing the validation state.
  
  */
--(BOOL)isTextValid:(NSString *)text;
+- (BOOL)isTextValid:(NSString *)text;
 
 
 ///--------------------

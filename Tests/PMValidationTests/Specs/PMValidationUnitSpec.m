@@ -101,22 +101,33 @@ describe(@"PMValidationUnit", ^{
             unit = [[PMValidationUnit alloc] initWithValidationTypes:set identifier:@"testUnit"];
         });
         
-        
-        it(@"should send a PMValidationUnitUpdateNotification notification", ^{
-            
-            __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUnitUpdateNotification object:unit queue:nil usingBlock:^(NSNotification *note) {
+        describe(@"unit is enabled, ", ^{
+            it(@"should send a PMValidationUnitUpdateNotification notification", ^{
                 
-                expect(note.object).to.beIdenticalTo(unit);
-                expect(note.userInfo[@"errors"]).to.beNil;
-                expect(unit.isValid).to.beTruthy();
+                __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:PMValidationUnitUpdateNotification object:unit queue:nil usingBlock:^(NSNotification *note) {
+                    
+                    expect(note.object).to.beIdenticalTo(unit);
+                    expect(note.userInfo[@"errors"]).to.beNil;
+                    expect(unit.isValid).to.beTruthy();
+                    
+                    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                    
+                }];
                 
-                [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                expect(^{ [unit validateText:@"testing"]; }).will.notify(PMValidationUnitUpdateNotification);
                 
-            }];
-            
-            expect(^{ [unit validateText:@"testing"]; }).will.notify(PMValidationUnitUpdateNotification);
-            
+            });
         });
+        
+        describe(@"unit is disabled, ", ^{
+            before(^{
+                unit.enabled = NO;
+            });
+            it(@"should not validate text", ^{
+                expect(^{ [unit validateText:@"testing"]; }).willNot.notify(PMValidationUnitUpdateNotification);
+            });
+        });
+        
     });
 
     

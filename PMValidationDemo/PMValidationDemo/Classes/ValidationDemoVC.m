@@ -301,7 +301,7 @@
 
 - (void)checkValidationStatus:(id)sender {
     
-    if ([self.validationManager isValid] == YES) {
+    if (self.validationManager.isValid) {
         self.view.backgroundColor = [UIColor greenColor];
     }
     

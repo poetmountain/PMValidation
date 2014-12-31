@@ -16,7 +16,7 @@ NSString *const kPMValidationComparisonTypeNotEquals = @"PMValidationComparisonT
 
 #pragma mark - Lifecycle methods
 
--(id)init {
+- (instancetype)init {
     
     self = [super init];
     if (self) {
@@ -34,7 +34,7 @@ NSString *const kPMValidationComparisonTypeNotEquals = @"PMValidationComparisonT
 
 
 
--(BOOL) isTextValid:(NSString *)text {
+- (BOOL)isTextValid:(NSString *)text {
     
     
     if (self.comparisonType == kPMValidationComparisonTypeEquals) {
@@ -50,7 +50,7 @@ NSString *const kPMValidationComparisonTypeNotEquals = @"PMValidationComparisonT
 #pragma mark - Class methods
 
 // returns a new instance of PMValidationStringMatchType
-+ (instancetype) validator {
++ (instancetype)validator {
     
     PMValidationStringCompareType *val = [[PMValidationStringCompareType alloc] init];
     

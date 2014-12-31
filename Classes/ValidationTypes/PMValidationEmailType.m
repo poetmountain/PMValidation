@@ -12,7 +12,7 @@
 
 
 // returns a new instance of PMValidationEmailType
-+ (instancetype) validator {
++ (instancetype)validator {
     
     PMValidationEmailType *val = [[PMValidationEmailType alloc] init];
     
@@ -21,7 +21,7 @@
 }
 
 
--(BOOL) isTextValid:(NSString *)text {
+- (BOOL)isTextValid:(NSString *)text {
     
     NSError *error = nil;
     
