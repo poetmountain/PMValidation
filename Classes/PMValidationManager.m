@@ -142,12 +142,19 @@ NSString *const PMValidationStatusNotification = @"PMValidationStatusNotificatio
     
     [self.validationUnits setObject:unit forKey:unit_identifier];
     
+    // listen for validation updates from unit
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unitUpdateNotificationHandler:) name:PMValidationUnitUpdateNotification object:unit];
+    
     return unit_identifier;
 
 }
 
 
 - (void)removeUnitForIdentifier:(NSString *)identifier {
+    
+    // remove validation update listener for this unit
+    PMValidationUnit *unit = [self unitForIdentifier:identifier];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PMValidationUnitUpdateNotification object:unit];
     
     [self.validationUnits removeObjectForKey:identifier];
     
