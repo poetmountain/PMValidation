@@ -22,6 +22,8 @@ The included [validation form example](https://github.com/poetmountain/PMValidat
 Here's a basic example, creating a string length constraint which passes validation while the string is between 4 and 8 characters.
 
 ``` objective-c
+#import <PMValidation/PMValidation.h>
+
 PMValidationLengthType *length_type = [PMValidationLengthType validator];
 length_type.minimumCharacters = 4;
 length_type.maximumCharacters = 8;
