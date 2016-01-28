@@ -1,3 +1,8 @@
+1.3.2
+=====
+* Added tvOS as a deployment target
+* Added main headers for framework-style import access
+
 1.3.1
 =====
 * Fixed PMValidationUnits added to PMValidationManager via 'addUnit:' not being listened for validation update notifications. Normally this is not necessary for non-UIKit units, but may be needed for custom subclasses which trigger their own updates.
