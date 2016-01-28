@@ -3,7 +3,7 @@
 //  PMValidationDemo
 //
 //  Created by Brett Walker on 1/27/16.
-//  Copyright © 2016 Poet & Mountain, LLC. All rights reserved.
+//  Copyright © 2012-2016 Poet & Mountain, LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

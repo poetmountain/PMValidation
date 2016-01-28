@@ -2,7 +2,7 @@
 //  PMValidationType.h
 //
 //  Created by Brett Walker on 6/8/12.
-//  Copyright (c) 2012 Poet & Mountain, LLC. All rights reserved.
+//  Copyright (c) 2012-2016 Poet & Mountain, LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

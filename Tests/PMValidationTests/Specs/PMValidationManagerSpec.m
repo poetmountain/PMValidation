@@ -3,7 +3,7 @@
 //  PMValidationTests
 //
 //  Created by Brett Walker on 3/27/14.
-//
+//  Copyright (c) 2012-2016 Poet & Mountain, LLC. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
