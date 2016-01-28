@@ -8,12 +8,7 @@
 
 #import "ValidationDemoVC.h"
 #import "ValidationUnitStatusIndicatorVC.h"
-#import "PMValidationManager.h"
-#import "PMValidationUnit.h"
-#import "PMValidationEmailType.h"
-#import "PMValidationLengthType.h"
-#import "PMValidationUITextCompareType.h"
-#import "PMValidationRegexType.h"
+#import "PMValidation.h"
 
 @interface ValidationDemoVC ()
 

@@ -54,6 +54,8 @@
 		8B1E1B0F165CAE030023EB75 /* ValidationUnitStatusIndicatorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValidationUnitStatusIndicatorVC.m; path = Classes/ValidationUnitStatusIndicatorVC.m; sourceTree = "<group>"; };
 		8B1E1B67165CD27A0023EB75 /* invalid_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invalid_icon.png; sourceTree = "<group>"; };
 		8B1E1B68165CD27A0023EB75 /* invalid_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invalid_icon@2x.png"; sourceTree = "<group>"; };
+		8B64C3371C59D57E00009A77 /* PMValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PMValidation.h; path = ../../Classes/PMValidation.h; sourceTree = "<group>"; };
+		8B64C3381C59D5D200009A77 /* PMValidationTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMValidationTypes.h; sourceTree = "<group>"; };
 		8BF4E1591662FB2C00011E97 /* PMValidationEmailType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMValidationEmailType.h; sourceTree = "<group>"; };
 		8BF4E15A1662FB2C00011E97 /* PMValidationEmailType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMValidationEmailType.m; sourceTree = "<group>"; };
 		8BF4E15B1662FB2C00011E97 /* PMValidationLengthType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMValidationLengthType.h; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				8B1E1AE8165C7CA60023EB75 /* PMValidationManager.m */,
 				8B1E1AF5165C7CA60023EB75 /* PMValidationUnit.h */,
 				8B1E1AF6165C7CA60023EB75 /* PMValidationUnit.m */,
+				8B64C3371C59D57E00009A77 /* PMValidation.h */,
 			);
 			name = PMValidation;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				8BF4E1621662FB2C00011E97 /* PMValidationType.m */,
 				8BF4E1631662FB2C00011E97 /* PMValidationUITextCompareType.h */,
 				8BF4E1641662FB2C00011E97 /* PMValidationUITextCompareType.m */,
+				8B64C3381C59D5D200009A77 /* PMValidationTypes.h */,
 			);
 			name = ValidationTypes;
 			path = ../../Classes/ValidationTypes;
@@ -215,7 +219,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Poet & Mountain, LLC";
 			};
 			buildConfigurationList = 8B1E1AB9165C73790023EB75 /* Build configuration list for PBXProject "PMValidationDemo" */;
@@ -295,6 +299,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -341,6 +346,7 @@
 				GCC_PREFIX_HEADER = "PMValidationDemo/PMValidationDemo-Prefix.pch";
 				INFOPLIST_FILE = "PMValidationDemo/PMValidationDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.poetmountain.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -354,6 +360,7 @@
 				GCC_PREFIX_HEADER = "PMValidationDemo/PMValidationDemo-Prefix.pch";
 				INFOPLIST_FILE = "PMValidationDemo/PMValidationDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.poetmountain.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
