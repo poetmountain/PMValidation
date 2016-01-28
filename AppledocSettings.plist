@@ -3,10 +3,9 @@
 	"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>--ignore</key>
+	<key>--input</key>
 	<array>
-		<string>PMValidationDemo</string>
-		<string>Tests</string>
+		<string>Classes/</string>
 	</array>
 	<key>--output</key>
 	<array>
@@ -18,8 +17,6 @@
 	<string>Poet &amp; Mountain, LLC</string>
 	<key>--company-id</key>
 	<string>com.poetmountain</string>
-  <key>--create-html</key>
-  <true/>
 	<key>--create-docset</key>
 	<false/>
 	<key>--install-docset</key>
@@ -29,6 +26,8 @@
 	<key>--verbose</key>
 	<string>4</string>
 	<key>--logformat</key>
-	<string>1</string>
+	<integer>1</integer>
+  <key>--docset-platform-family</key>
+  <string>iphoneos</string>
 </dict>
 </plist>
